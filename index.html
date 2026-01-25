@@ -1,365 +1,348 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 12.0px 'Lucida Grande'}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NPF - New Physical Forms</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #000000;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #000000;
+      z-index: 1000;
+      padding: 20px 40px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover { opacity: 0.5; }
+
+    .logo {
+      font-weight: 600 !important;
+      font-size: 16px !important;
+      margin-right: auto;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 40px 80px;
+      border-bottom: 1px solid #000000;
+
+      /* Viktigt när nav är fixed (så rubriken inte hamnar bakom nav vid ankarlänk) */
+      scroll-margin-top: 90px;
+    }
+
+    section:last-child { border-bottom: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .card {
+      border: 1px solid #000000;
+      padding: 0;
+      cursor: default;
+      transition: transform 0.2s;
+    }
+
+    .card:hover { transform: translateY(-2px); }
+
+    .card-image {
+      width: 100%;
+      height: 400px;
+      background: #f5f5f5;
+      border-bottom: 1px solid #000000;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content { padding: 20px; }
+
+    .card-number {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .project {
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .project:last-child { border-bottom: none; }
+
+    .project-title {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .project-status {
+      font-size: 12px;
+      font-weight: 400;
+      color: #666;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .loop-diagram {
+      margin: 60px auto;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .loop-text {
+      font-size: 36px;
+      font-weight: 300;
+      letter-spacing: 4px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 60px;
+      margin-top: 60px;
+    }
+
+    .contact-section h3 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .contact-section p {
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    @media (max-width: 768px) {
+      nav ul { flex-wrap: wrap; gap: 20px; }
+      section { padding: 100px 20px 60px; }
+      h1 { font-size: 32px; }
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;NPF - New Physical Forms&lt;/title&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Google Font --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>html { scroll-behavior: smooth; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #000000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid #000000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>z-index: 1000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px 40px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav ul {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>list-style: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav a {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #000000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 400;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1.5px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav a:hover { opacity: 0.5; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600 !important;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px !important;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-right: auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>section {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 120px 40px 80px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid #000000;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>/* Viktigt när nav är fixed (så rubriken inte hamnar bakom nav vid ankarlänk) */</p>
-<p class="p1"><span class="Apple-converted-space">      </span>scroll-margin-top: 90px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>section:last-child { border-bottom: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1200px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 48px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 300;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: -1px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h2 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h3 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 300;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 700px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #000000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: default;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: transform 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card:hover { transform: translateY(-2px); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card-image {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 400px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #f5f5f5;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid #000000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card-image img {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>object-fit: cover;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card-content { padding: 20px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card-number {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.project {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-bottom: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid #e0e0e0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.project:last-child { border-bottom: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.project-title {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.project-status {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 400;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #666;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.loop-diagram {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 60px auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 600px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.loop-text {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 36px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 300;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.contact-grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.contact-section h3 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.contact-section p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 2;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 768px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>nav ul { flex-wrap: wrap; gap: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>section { padding: 100px 20px 60px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>h1 { font-size: 32px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.grid { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#home" class="logo"&gt;NPF&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#wtf"&gt;WTF&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#add"&gt;ADD&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#lab"&gt;LAB&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#brb"&gt;BRB&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#osv"&gt;OSV&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/nav&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="home"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;New Physical Forms&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;NPF is a systematic framework for creative exploration across temporary installations, applied design, and material research. Operating at the intersection of art, design, and spatial investigation.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="wtf"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;01 — WTF&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Workshop for Temporary Forms&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Set design, window displays, events, and temporary spatial interventions. WTF explores the ephemeral nature of built environments, creating installations that exist within defined temporal boundaries.&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-image"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card-number"&gt;WTF—001&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Project title and brief description&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-image"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card-number"&gt;WTF—002&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Project title and brief description&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="add"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;02 — ADD&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Applied Design Division&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Collectibles, numbered and limited edition furniture, garments, and art objects. Each piece is systematically catalogued and produced in controlled quantities.&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-image"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
-<p class="p1"><span class="Apple-converted-space">              </span>src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A001%20Image%3C/text%3E%3C/svg%3E"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>alt="Anodized aluminum piece A001"</p>
-<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card-number"&gt;ADD—A001&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Anodized aluminum composition, limited edition&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-image"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img</p>
-<p class="p1"><span class="Apple-converted-space">              </span>src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A002%20Image%3C/text%3E%3C/svg%3E"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>alt="Anodized aluminum piece A002"</p>
-<p class="p1"><span class="Apple-converted-space">            </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="card-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card-number"&gt;ADD—A002&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Anodized aluminum composition, limited edition&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="lab"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;03 — LAB&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Laboratory&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;A research and exploration division investigating material properties, spatial conditions, and form generation.&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="project"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="project-title"&gt;BIG SLURP&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="project-status"&gt;Ongoing investigation · Proposed installation&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;BIG SLURP explores continuous inversion as a spatial condition. A textile body of constant length is turned through itself by a distributed system, producing a persistent loop without origin or resolution. The project treats inversion not as an event, but as a sustained state in which inside and outside remain temporary and reversible.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="project"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="project-title"&gt;Anodized Aluminum Surface Study&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="project-status"&gt;Material research · Ongoing&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Investigation of microscopic photographs of anodized aluminum surfaces, revealing a hidden chromatic landscape. What appears macroscopically as uniform gray resolves at the microscale into complex patterns of colorful crystalline structures. This research examines the gap between perceived and actual material properties, questioning assumptions about surface and color at different scales of observation.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="brb"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;04 — BRB&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Build · Research · Build&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Our working philosophy. A continuous loop where making informs inquiry and inquiry informs making. Knowledge emerges through iterative physical practice rather than preceding it.&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="loop-diagram"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="loop-text"&gt;BUILD <span class="s1">→</span> RESEARCH <span class="s1">→</span> BUILD&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section id="osv"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;05 — OSV&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3&gt;Open System View&lt;/h3&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="contact-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="contact-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Contact&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Email: &lt;a href="mailto:info@npf.sytem" style="color:#000;text-decoration:none;border-bottom:1px solid #000;"&gt;info@npf.sytem&lt;/a&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Phone: +46 XX XXX XX XX</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="contact-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Location&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;Stockholm, Sweden&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="contact-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Collaborators&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;Available upon request&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Ingen JS behövs för smooth scroll (vi gör det via CSS), vilket minskar strul på GitHub Pages --&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <nav>
+    <ul>
+      <li><a href="#home" class="logo">NPF</a></li>
+      <li><a href="#wtf">WTF</a></li>
+      <li><a href="#add">ADD</a></li>
+      <li><a href="#lab">LAB</a></li>
+      <li><a href="#brb">BRB</a></li>
+      <li><a href="#osv">OSV</a></li>
+    </ul>
+  </nav>
+
+  <section id="home">
+    <div class="container">
+      <h1>New Physical Forms</h1>
+      <p>NPF is a systematic framework for creative exploration across temporary installations, applied design, and material research. Operating at the intersection of art, design, and spatial investigation.</p>
+    </div>
+  </section>
+
+  <section id="wtf">
+    <div class="container">
+      <h2>01 — WTF</h2>
+      <h3>Workshop for Temporary Forms</h3>
+      <p>Set design, window displays, events, and temporary spatial interventions. WTF explores the ephemeral nature of built environments, creating installations that exist within defined temporal boundaries.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-content">
+            <div class="card-number">WTF—001</div>
+            <p>Project title and brief description</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image"></div>
+          <div class="card-content">
+            <div class="card-number">WTF—002</div>
+            <p>Project title and brief description</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="add">
+    <div class="container">
+      <h2>02 — ADD</h2>
+      <h3>Applied Design Division</h3>
+      <p>Collectibles, numbered and limited edition furniture, garments, and art objects. Each piece is systematically catalogued and produced in controlled quantities.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A001%20Image%3C/text%3E%3C/svg%3E"
+              alt="Anodized aluminum piece A001"
+            />
+          </div>
+          <div class="card-content">
+            <div class="card-number">ADD—A001</div>
+            <p>Anodized aluminum composition, limited edition</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image">
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A002%20Image%3C/text%3E%3C/svg%3E"
+              alt="Anodized aluminum piece A002"
+            />
+          </div>
+          <div class="card-content">
+            <div class="card-number">ADD—A002</div>
+            <p>Anodized aluminum composition, limited edition</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lab">
+    <div class="container">
+      <h2>03 — LAB</h2>
+      <h3>Laboratory</h3>
+      <p>A research and exploration division investigating material properties, spatial conditions, and form generation.</p>
+
+      <div class="project">
+        <div class="project-title">BIG SLURP</div>
+        <div class="project-status">Ongoing investigation · Proposed installation</div>
+        <p>BIG SLURP explores continuous inversion as a spatial condition. A textile body of constant length is turned through itself by a distributed system, producing a persistent loop without origin or resolution. The project treats inversion not as an event, but as a sustained state in which inside and outside remain temporary and reversible.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-title">Anodized Aluminum Surface Study</div>
+        <div class="project-status">Material research · Ongoing</div>
+        <p>Investigation of microscopic photographs of anodized aluminum surfaces, revealing a hidden chromatic landscape. What appears macroscopically as uniform gray resolves at the microscale into complex patterns of colorful crystalline structures. This research examines the gap between perceived and actual material properties, questioning assumptions about surface and color at different scales of observation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="brb">
+    <div class="container">
+      <h2>04 — BRB</h2>
+      <h3>Build · Research · Build</h3>
+      <p>Our working philosophy. A continuous loop where making informs inquiry and inquiry informs making. Knowledge emerges through iterative physical practice rather than preceding it.</p>
+
+      <div class="loop-diagram">
+        <div class="loop-text">BUILD → RESEARCH → BUILD</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="osv">
+    <div class="container">
+      <h2>05 — OSV</h2>
+      <h3>Open System View</h3>
+
+      <div class="contact-grid">
+        <div class="contact-section">
+          <h3>Contact</h3>
+          <p>
+            Email: <a href="mailto:info@npf.sytem" style="color:#000;text-decoration:none;border-bottom:1px solid #000;">info@npf.sytem</a><br />
+            Phone: +46 XX XXX XX XX
+          </p>
+        </div>
+
+        <div class="contact-section">
+          <h3>Location</h3>
+          <p>Stockholm, Sweden</p>
+        </div>
+
+        <div class="contact-section">
+          <h3>Collaborators</h3>
+          <p>Available upon request</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingen JS behövs för smooth scroll (vi gör det via CSS), vilket minskar strul på GitHub Pages -->
 </body>
 </html>
