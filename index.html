@@ -252,7 +252,33 @@
         .contact-section:nth-child(2) { animation-delay: 0.2s; }
         .contact-section:nth-child(3) { animation-delay: 0.3s; }
         
-        .contact-section h3 {
+        .division-links {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .division-link {
+            text-decoration: none;
+            color: var(--text-black);
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: block;
+            line-height: 1.8;
+        }
+        
+        .division-link:hover {
+            color: var(--accent-orange);
+            transform: translateX(10px);
+        }
+        
+        .division-link strong {
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 2px;
@@ -319,15 +345,13 @@
             <h1>New Physical Forms</h1>
             <p style="margin-bottom: 40px;">NPF is a systematic framework for creative exploration operating across five interdependent divisions. Each division addresses a distinct aspect of spatial and material practice while maintaining dialogue with the whole.</p>
             
-            <p style="margin-bottom: 20px;"><strong>WTF</strong> — Workshop for Temporary Forms: Ephemeral installations, set design, and event-based work.</p>
-            
-            <p style="margin-bottom: 20px;"><strong>ADD</strong> — Applied Design Division: Limited edition objects, furniture, and collectibles with systematic cataloguing.</p>
-            
-            <p style="margin-bottom: 20px;"><strong>LAB</strong> — Laboratory: Material research and spatial investigation through ongoing projects.</p>
-            
-            <p style="margin-bottom: 20px;"><strong>BRB</strong> — Build · Research · Build: Our working philosophy of iterative physical practice.</p>
-            
-            <p><strong>OSV</strong> — Open System View: Contact and collaborative network.</p>
+            <div class="division-links">
+                <a href="#wtf" class="division-link"><strong>WTF</strong> — Workshop for Temporary Forms</a>
+                <a href="#add" class="division-link"><strong>ADD</strong> — Applied Design Division</a>
+                <a href="#lab" class="division-link"><strong>LAB</strong> — Laboratory</a>
+                <a href="#brb" class="division-link"><strong>BRB</strong> — Build · Research · Build</a>
+                <a href="#osv" class="division-link"><strong>OSV</strong> — Open System View</a>
+            </div>
         </div>
     </section>
 
