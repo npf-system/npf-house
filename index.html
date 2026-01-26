@@ -1,365 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NPF - New Physical Forms</title>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #ffffff;
-      color: #000000;
-      line-height: 1.6;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #ffffff;
-      border-bottom: 1px solid #000000;
-      z-index: 1000;
-      padding: 20px 40px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 40px;
-      align-items: center;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #000000;
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 1.5px;
-      transition: opacity 0.2s;
-    }
-
-    nav a:hover { opacity: 0.5; }
-
-    .logo {
-      font-weight: 600 !important;
-      font-size: 16px !important;
-      margin-right: auto;
-    }
-
-    section {
-      min-height: 100vh;
-      padding: 120px 40px 80px;
-      border-bottom: 1px solid #000000;
-
-      /* Viktigt när nav är fixed (så rubriken inte hamnar bakom nav vid ankarlänk) */
-      scroll-margin-top: 90px;
-    }
-
-    section:last-child { border-bottom: none; }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 48px;
-      font-weight: 300;
-      margin-bottom: 20px;
-      letter-spacing: -1px;
-    }
-
-    h2 {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-
-    h3 {
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 1.8;
-      max-width: 700px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      margin-top: 60px;
-    }
-
-    .card {
-      border: 1px solid #000000;
-      padding: 0;
-      cursor: default;
-      transition: transform 0.2s;
-    }
-
-    .card:hover { transform: translateY(-2px); }
-
-    .card-image {
-      width: 100%;
-      height: 400px;
-      background: #f5f5f5;
-      border-bottom: 1px solid #000000;
-      overflow: hidden;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-content { padding: 20px; }
-
-    .card-number {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-
-    .project {
-      margin-bottom: 60px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .project:last-child { border-bottom: none; }
-
-    .project-title {
-      font-size: 24px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .project-status {
-      font-size: 12px;
-      font-weight: 400;
-      color: #666;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
-
-    .loop-diagram {
-      margin: 60px auto;
-      text-align: center;
-      max-width: 600px;
-    }
-
-    .loop-text {
-      font-size: 36px;
-      font-weight: 300;
-      letter-spacing: 4px;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 60px;
-      margin-top: 60px;
-    }
-
-    .contact-section h3 {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .contact-section p {
-      font-size: 14px;
-      line-height: 2;
-    }
-
-    @media (max-width: 768px) {
-      nav ul { flex-wrap: wrap; gap: 20px; }
-      section { padding: 100px 20px 60px; }
-      h1 { font-size: 32px; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPF - New Physical Forms</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --klein-blue: #002FA7;
+            --bg-gray: #F8F8F8;
+            --border-color: #D0D0D0;
+            --text-black: #000000;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-gray);
+            color: var(--text-black);
+            line-height: 1.6;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 248, 248, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 20px 40px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-black);
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+        
+        nav a:hover {
+            opacity: 1;
+            color: var(--klein-blue);
+        }
+        
+        nav a.active {
+            opacity: 1;
+            color: var(--klein-blue);
+            font-weight: 500;
+        }
+        
+        .logo {
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            margin-right: auto;
+            opacity: 1 !important;
+            color: var(--text-black) !important;
+        }
+        
+        section {
+            min-height: 100vh;
+            padding: 120px 40px 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            color: var(--klein-blue);
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 47, 167, 0.1);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 400px;
+            background: #e8e8e8;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+            background: #ffffff;
+        }
+        
+        .card-number {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: var(--klein-blue);
+        }
+        
+        .project {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .project:nth-child(1) { animation-delay: 0.1s; }
+        .project:nth-child(2) { animation-delay: 0.2s; }
+        
+        .project:last-child {
+            border-bottom: none;
+        }
+        
+        .project-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .project-status {
+            font-size: 12px;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .loop-diagram {
+            margin: 60px auto;
+            text-align: center;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+        
+        .loop-text {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--klein-blue);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .contact-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .contact-section:nth-child(1) { animation-delay: 0.1s; }
+        .contact-section:nth-child(2) { animation-delay: 0.2s; }
+        .contact-section:nth-child(3) { animation-delay: 0.3s; }
+        
+        .contact-section h3 {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--klein-blue);
+        }
+        
+        .contact-section p {
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        /* Image placeholder styling */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            section {
+                padding: 100px 20px 60px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .loop-text {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <nav>
-    <ul>
-      <li><a href="#home" class="logo">NPF</a></li>
-      <li><a href="#wtf">WTF</a></li>
-      <li><a href="#add">ADD</a></li>
-      <li><a href="#lab">LAB</a></li>
-      <li><a href="#brb">BRB</a></li>
-      <li><a href="#osv">OSV</a></li>
-    </ul>
-  </nav>
+    <nav>
+        <ul>
+            <li><a href="#home" class="logo">NPF</a></li>
+            <li><a href="#wtf" data-section="wtf">WTF</a></li>
+            <li><a href="#add" data-section="add">ADD</a></li>
+            <li><a href="#lab" data-section="lab">LAB</a></li>
+            <li><a href="#brb" data-section="brb">BRB</a></li>
+            <li><a href="#osv" data-section="osv">OSV</a></li>
+        </ul>
+    </nav>
 
- <section id="home">
-  <div class="container">
-
-    <img
-      src="assets/NPF_SUISSE_LOGO_NOTEXT.png"
-      alt="NPF — New Physical Forms"
-      style="
-        max-width: 420px;
-        width: 100%;
-        margin-bottom: 40px;
-        display: block;
-      "
-    />
-
-    <p>
-      NPF is a systematic framework for creative exploration across temporary
-      installations, applied design, and material research. Operating at the
-      intersection of art, design, and spatial investigation.
-    </p>
-
-  </div>
-</section>
-
-
-  <section id="wtf">
-    <div class="container">
-      <h2>01 — WTF</h2>
-      <h3>Workshop for Temporary Forms</h3>
-      <p>Set design, window displays, events, and temporary spatial interventions. WTF explores the ephemeral nature of built environments, creating installations that exist within defined temporal boundaries.</p>
-
-      <div class="grid">
-        <div class="card">
-          <div class="card-image"></div>
-          <div class="card-content">
-            <div class="card-number">WTF—001</div>
-            <p>Project title and brief description</p>
-          </div>
+    <section id="home">
+        <div class="container">
+            <h1>New Physical Forms</h1>
+            <p style="margin-bottom: 40px;">NPF is a systematic framework for creative exploration operating across five interdependent divisions. Each division addresses a distinct aspect of spatial and material practice while maintaining dialogue with the whole.</p>
+            
+            <p style="margin-bottom: 20px;"><strong>WTF</strong> — Workshop for Temporary Forms: Ephemeral installations, set design, and event-based work.</p>
+            
+            <p style="margin-bottom: 20px;"><strong>ADD</strong> — Applied Design Division: Limited edition objects, furniture, and collectibles with systematic cataloguing.</p>
+            
+            <p style="margin-bottom: 20px;"><strong>LAB</strong> — Laboratory: Material research and spatial investigation through ongoing projects.</p>
+            
+            <p style="margin-bottom: 20px;"><strong>BRB</strong> — Build · Research · Build: Our working philosophy of iterative physical practice.</p>
+            
+            <p><strong>OSV</strong> — Open System View: Contact and collaborative network.</p>
         </div>
+    </section>
 
-        <div class="card">
-          <div class="card-image"></div>
-          <div class="card-content">
-            <div class="card-number">WTF—002</div>
-            <p>Project title and brief description</p>
-          </div>
+    <section id="wtf">
+        <div class="container">
+            <h2>01 — WTF</h2>
+            <h3>Workshop for Temporary Forms</h3>
+            <p>Set design, window displays, events, and temporary spatial interventions. WTF explores the ephemeral nature of built environments, creating installations that exist within defined temporal boundaries.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image">
+                        <!-- REPLACE: /images/wtf/2026/001.jpg -->
+                        <div class="img-placeholder">WTF—2026—001</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">WTF—2026—001</div>
+                        <p>Project title and brief description</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- REPLACE: /images/wtf/2026/002.jpg -->
+                        <div class="img-placeholder">WTF—2026—002</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">WTF—2026—002</div>
+                        <p>Project title and brief description</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="add">
-    <div class="container">
-      <h2>02 — ADD</h2>
-      <h3>Applied Design Division</h3>
-      <p>Collectibles, numbered and limited edition furniture, garments, and art objects. Each piece is systematically catalogued and produced in controlled quantities.</p>
-
-      <div class="grid">
-        <div class="card">
-          <div class="card-image">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A001%20Image%3C/text%3E%3C/svg%3E"
-              alt="Anodized aluminum piece A001"
-            />
-          </div>
-          <div class="card-content">
-            <div class="card-number">ADD—A001</div>
-            <p>Anodized aluminum composition, limited edition</p>
-          </div>
+    <section id="add">
+        <div class="container">
+            <h2>02 — ADD</h2>
+            <h3>Applied Design Division</h3>
+            <p>Collectibles, numbered and limited edition furniture, garments, and art objects. Each piece is systematically catalogued and produced in controlled quantities.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image">
+                        <!-- REPLACE: /images/add/A001.jpg -->
+                        <div class="img-placeholder">ADD—A001</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">ADD—A001</div>
+                        <p>Anodized aluminum composition, limited edition</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">
+                        <!-- REPLACE: /images/add/A002.jpg -->
+                        <div class="img-placeholder">ADD—A002</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-number">ADD—A002</div>
+                        <p>Anodized aluminum composition, limited edition</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-          <div class="card-image">
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='14' fill='%23999'%3EADD%E2%80%94A002%20Image%3C/text%3E%3C/svg%3E"
-              alt="Anodized aluminum piece A002"
-            />
-          </div>
-          <div class="card-content">
-            <div class="card-number">ADD—A002</div>
-            <p>Anodized aluminum composition, limited edition</p>
-          </div>
+    <section id="lab">
+        <div class="container">
+            <h2>03 — LAB</h2>
+            <h3>Laboratory</h3>
+            <p>A research and exploration division investigating material properties, spatial conditions, and form generation.</p>
+            
+            <div class="project">
+                <div class="project-title">BIG SLURP</div>
+                <div class="project-status">Ongoing investigation · Proposed installation</div>
+                <p>BIG SLURP explores continuous inversion as a spatial condition. A textile body of constant length is turned through itself by a distributed system, producing a persistent loop without origin or resolution. The project treats inversion not as an event, but as a sustained state in which inside and outside remain temporary and reversible.</p>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">Anodized Aluminum Surface Study</div>
+                <div class="project-status">Material research · Ongoing</div>
+                <p>Investigation of microscopic photographs of anodized aluminum surfaces, revealing a hidden chromatic landscape. What appears macroscopically as uniform gray resolves at the microscale into complex patterns of colorful crystalline structures. This research examines the gap between perceived and actual material properties, questioning assumptions about surface and color at different scales of observation.</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="lab">
-    <div class="container">
-      <h2>03 — LAB</h2>
-      <h3>Laboratory</h3>
-      <p>A research and exploration division investigating material properties, spatial conditions, and form generation.</p>
-
-      <div class="project">
-        <div class="project-title">BIG SLURP</div>
-        <div class="project-status">Ongoing investigation · Proposed installation</div>
-        <p>BIG SLURP explores continuous inversion as a spatial condition. A textile body of constant length is turned through itself by a distributed system, producing a persistent loop without origin or resolution. The project treats inversion not as an event, but as a sustained state in which inside and outside remain temporary and reversible.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-title">Anodized Aluminum Surface Study</div>
-        <div class="project-status">Material research · Ongoing</div>
-        <p>Investigation of microscopic photographs of anodized aluminum surfaces, revealing a hidden chromatic landscape. What appears macroscopically as uniform gray resolves at the microscale into complex patterns of colorful crystalline structures. This research examines the gap between perceived and actual material properties, questioning assumptions about surface and color at different scales of observation.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="brb">
-    <div class="container">
-      <h2>04 — BRB</h2>
-      <h3>Build · Research · Build</h3>
-      <p>Our working philosophy. A continuous loop where making informs inquiry and inquiry informs making. Knowledge emerges through iterative physical practice rather than preceding it.</p>
-
-      <div class="loop-diagram">
-        <div class="loop-text">BUILD → RESEARCH → BUILD</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="osv">
-    <div class="container">
-      <h2>05 — OSV</h2>
-      <h3>Open System View</h3>
-
-      <div class="contact-grid">
-        <div class="contact-section">
-          <h3>Contact</h3>
-          <p>
-            Email: <a href="mailto:info@npf.sytem" style="color:#000;text-decoration:none;border-bottom:1px solid #000;">info@npf.sytem</a><br />
-            Phone: +46 XX XXX XX XX
-          </p>
+    <section id="brb">
+        <div class="container">
+            <h2>04 — BRB</h2>
+            <h3>Build · Research · Build</h3>
+            <p>Our working philosophy. A continuous loop where making informs inquiry and inquiry informs making. Knowledge emerges through iterative physical practice rather than preceding it.</p>
+            
+            <div class="loop-diagram">
+                <div class="loop-text">BUILD → RESEARCH → BUILD</div>
+            </div>
         </div>
+    </section>
 
-        <div class="contact-section">
-          <h3>Location</h3>
-          <p>Stockholm, Sweden</p>
+    <section id="osv">
+        <div class="container">
+            <h2>05 — OSV</h2>
+            <h3>Open System View</h3>
+            
+            <div class="contact-grid">
+                <div class="contact-section">
+                    <h3>Contact</h3>
+                    <p>
+                        Email: info@npf.studio<br>
+                        Phone: +46 XX XXX XX XX
+                    </p>
+                </div>
+                
+                <div class="contact-section">
+                    <h3>Location</h3>
+                    <p>
+                        Stockholm, Sweden
+                    </p>
+                </div>
+                
+                <div class="contact-section">
+                    <h3>Collaborators</h3>
+                    <p>
+                        Available upon request
+                    </p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="contact-section">
-          <h3>Collaborators</h3>
-          <p>Available upon request</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ingen JS behövs för smooth scroll (vi gör det via CSS), vilket minskar strul på GitHub Pages -->
+    <script>
+        // Smooth scrolling and active nav highlighting
+        const navLinks = document.querySelectorAll('nav a[data-section]');
+        const sections = document.querySelectorAll('section');
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Active section highlighting on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
