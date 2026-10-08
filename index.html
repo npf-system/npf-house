@@ -57,9 +57,9 @@ nav a:hover{color:var(--orange-ink)}
 
 /* hero */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(32px,5vw,64px)}
-.hero h1{grid-column:1/9;font-size:clamp(56px,11.5vw,184px);font-weight:900;letter-spacing:-.055em}
+.hero h1{grid-column:1/8;font-size:clamp(56px,11.5vw,184px);font-weight:900;letter-spacing:-.055em}
 .hero h1 em{font-style:normal;color:var(--orange)}
-.hero .mark{grid-column:9/13;align-self:end;justify-self:end;width:100%;max-width:340px;aspect-ratio:1}
+.hero .mark{grid-column:8/13;align-self:end;justify-self:end;font-size:clamp(56px,11.5vw,184px);height:2.58em;width:auto;max-width:100%;aspect-ratio:1;margin-bottom:.1em}
 .hero .meta{grid-column:1/13;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g);margin-top:clamp(28px,4vw,56px);padding-top:16px;border-top:1px solid var(--ink)}
 .hero .meta>*{grid-column:span 3;min-width:0}
 .hero .meta .lede{grid-column:span 6;font-size:clamp(18px,1.7vw,22px);line-height:1.4;letter-spacing:-.01em;max-width:40ch}
@@ -131,8 +131,10 @@ nav a:hover{color:var(--orange-ink)}
 .tile .face.inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .tile .face svg{width:100%;height:auto;overflow:visible}
 .word{font-weight:900;letter-spacing:-.06em;font-size:clamp(48px,6vw,92px);line-height:.8}
-.lock{display:flex;align-items:center;gap:.28em;font-weight:900;letter-spacing:-.05em;font-size:clamp(28px,3vw,44px);line-height:1}
+.lock{display:flex;align-items:center;gap:.28em;font-weight:900;letter-spacing:-.05em;font-size:clamp(20px,2.1vw,34px);line-height:1;white-space:nowrap}
 .lock svg{width:1.05em;height:1.05em;flex:none}
+.tile .face .lock svg{width:1.05em;height:1.05em}
+.tile .face .stack svg{width:56%;height:auto}
 .lock .sl{font-weight:300;color:var(--muted)}
 .tile .face.inv .lock .sl{color:color-mix(in srgb,var(--paper) 55%,transparent)}
 .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g);margin-top:clamp(28px,4vw,48px)}
@@ -151,7 +153,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 
 @media (max-width:1000px){
   .hero h1{grid-column:1/13}
-  .hero .mark{grid-column:1/13;justify-self:start;max-width:220px;margin-top:24px}
+  .hero .mark{grid-column:1/13;justify-self:start;margin-bottom:0;height:auto;width:100%;max-width:220px;margin-top:24px}
   .hero .meta>*{grid-column:span 6}
   .hero .meta .lede{grid-column:1/13;margin-bottom:12px}
   .divs{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -181,7 +183,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 <header>
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="NPF.house — start">
-      <svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>
+      <svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>
       <span>NPF<span style="font-weight:300;color:var(--muted)">.house</span></span>
     </a>
     <nav aria-label="Divisions">
@@ -197,7 +199,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
   <section class="wrap hero">
     <div class="grid">
       <h1>New Physical Forms<em>.</em></h1>
-      <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="The Slurp, NPF symbol"><use href="#slurp"/></svg>
+      <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="The Slurp, NPF symbol"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>
       <div class="meta">
         <p class="lede">A house for research, design and fabrication. Form is studied, drawn and built under one roof, in our own workshop in Stockholm.</p>
         <div><div class="label">Practice</div>Research / Design / Fabrication</div>
@@ -250,7 +252,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
         <span class="label status"><i></i> The source — no end</span>
       </div>
       <div class="grid">
-        <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="Big Slurp, turning"><g class="spin"><use href="#slurp"/></g></svg>
+        <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="Big Slurp, turning"><g class="spin"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></g></svg>
         <div class="txt">
           <span class="label">L000</span>
           <h2>Big Slurp</h2>
@@ -318,14 +320,14 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
   <section class="wrap sec rule" id="identity">
     <div class="sec-head"><h2>The mark</h2><span class="label">Identity / Logo set</span></div>
     <div class="marks">
-      <div class="tile"><div class="face"><svg class="sw" viewBox="-102 -102 204 204"  aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">01 Symbol — positive</span></div>
-      <div class="tile"><div class="face inv"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">02 Symbol — negative</span></div>
-      <div class="tile"><div class="face or"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">03 Symbol — on orange</span></div>
-      <div class="tile"><div class="face"><svg class="sw line" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">04 Symbol — line, for etching and laser</span></div>
+      <div class="tile"><div class="face"><svg class="sw" viewBox="-102 -102 204 204"  aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">01 Symbol — positive</span></div>
+      <div class="tile"><div class="face inv"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">02 Symbol — negative</span></div>
+      <div class="tile"><div class="face or"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">03 Symbol — on orange</span></div>
+      <div class="tile"><div class="face"><svg class="sw line" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">04 Symbol — line, for etching and laser</span></div>
       <div class="tile"><div class="face"><span class="word">NPF</span></div><span class="label">05 Wordmark</span></div>
-      <div class="tile"><div class="face inv"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>NPF</span></div><span class="label">06 Lockup — primary</span></div>
-      <div class="tile"><div class="face"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>NPF<span class="sl">/</span>LAB</span></div><span class="label">07 Division lockup</span></div>
-      <div class="tile"><div class="face"><span class="stack"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg><span>NPF</span><small>New Physical Forms</small></span></div><span class="label">08 Stacked lockup</span></div>
+      <div class="tile"><div class="face inv"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>NPF</span></div><span class="label">06 Lockup — primary</span></div>
+      <div class="tile"><div class="face"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>NPF<span class="sl">/</span>LAB</span></div><span class="label">07 Division lockup</span></div>
+      <div class="tile"><div class="face"><span class="stack"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg><span>NPF</span><small>New Physical Forms</small></span></div><span class="label">08 Stacked lockup</span></div>
     </div>
     <div class="rules">
       <div><b>Use the original</b>The swirl is always placed from the master file. Never redrawn, stretched, mirrored or rotated to a new resting angle.</div>
