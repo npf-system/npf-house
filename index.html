@@ -45,11 +45,6 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:va
 .brand svg{width:28px;height:28px}
 .sw{fill:currentColor;display:block}
 .sw.line{fill:none;stroke:currentColor;stroke-width:1.1}
-.tile .face.or{background:var(--orange);border-color:var(--orange);color:#0D0D0C}
-.stack{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%}
-.stack svg{width:56%!important}
-.stack span{font-weight:900;letter-spacing:-.05em;font-size:clamp(24px,2.6vw,38px);line-height:1}
-.stack small{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
 nav{display:flex;gap:clamp(12px,2.4vw,32px);flex-wrap:wrap}
 nav a{text-decoration:none;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em}
 nav a span{color:var(--muted)}
@@ -78,7 +73,7 @@ nav a:hover{color:var(--orange-ink)}
 .div .go{margin-top:auto;font-family:var(--mono);font-size:12px}
 .div:hover .code{color:var(--orange)}
 
-/* L000 */
+/* LAB_001 */
 .l000{background:var(--ink);color:var(--paper)}
 .l000 .label{color:color-mix(in srgb,var(--paper) 62%,transparent)}
 .l000 .grid{row-gap:32px}
@@ -124,27 +119,27 @@ nav a:hover{color:var(--orange-ink)}
 .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;border:1px solid var(--ink);border-radius:99px;padding:2px 8px}
 .tag.live{background:var(--orange);border-color:var(--orange);color:#0D0D0C}
 
-/* identity */
-.marks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--g)}
-.tile{display:flex;flex-direction:column;gap:12px;min-width:0}
-.tile .face{aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--line);padding:14%}
-.tile .face.inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.tile .face svg{width:100%;height:auto;overflow:visible}
-.word{font-weight:900;letter-spacing:-.06em;font-size:clamp(48px,6vw,92px);line-height:.8}
-.lock{display:flex;align-items:center;gap:.28em;font-weight:900;letter-spacing:-.05em;font-size:clamp(20px,2.1vw,34px);line-height:1;white-space:nowrap}
-.lock svg{width:1.05em;height:1.05em;flex:none}
-.tile .face .lock svg{width:1.05em;height:1.05em}
-.tile .face .stack svg{width:56%;height:auto}
-.lock .sl{font-weight:300;color:var(--muted)}
-.tile .face.inv .lock .sl{color:color-mix(in srgb,var(--paper) 55%,transparent)}
-.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g);margin-top:clamp(28px,4vw,48px)}
-.rules div{border-top:1px solid var(--line);padding-top:12px;font-size:15px;color:var(--muted);min-width:0}
-.rules b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+
+/* LAB_001 studies — figures sit on a fixed paper panel so the ink lines read in dark mode too */
+.studies .grid{row-gap:var(--g)}
+.fig{display:flex;flex-direction:column;gap:12px;min-width:0;margin:0}
+.fig .pane{background:#E6E5E2;border:1px solid var(--line);display:grid;place-items:center;padding:clamp(12px,2vw,28px)}
+.fig img{display:block;width:100%;height:auto}
+.fig figcaption{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--muted);max-width:40ch}
+.fig figcaption b{color:var(--ink);font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.f-a{grid-column:1/8}.f-c{grid-column:8/13}.f-d{grid-column:1/7}.f-b{grid-column:7/13}
+.f-c .pane{height:100%}
+.f-c img{max-width:62%}
+.dl{grid-column:1/13;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--ink);padding-top:16px}
+.dl a{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-decoration:none;border:1px solid var(--ink);padding:8px 12px}
+.dl a:hover{background:var(--ink);color:var(--paper)}
 
 /* OSV */
 .osv{border-top:1px solid var(--ink)}
 .osv .grid{row-gap:28px}
-.osv h2{grid-column:1/8;font-size:clamp(44px,7vw,112px);font-weight:900}
+.osv-h{grid-column:1/8;display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px)}
+.osv-sub{font-size:clamp(22px,2.6vw,38px);font-weight:300;letter-spacing:-.02em;line-height:1.1;border-left:2px solid var(--orange);padding-left:14px}
+.osv h2{font-size:clamp(44px,7vw,112px);font-weight:900}
 .osv .ct{grid-column:9/13;display:flex;flex-direction:column;gap:18px;font-size:17px}
 .osv .ct .mail{font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-.02em;user-select:all}
 .copy{font-family:var(--mono);font-size:12px;background:none;border:1px solid var(--ink);color:var(--ink);padding:6px 10px;cursor:pointer;align-self:flex-start}
@@ -160,12 +155,13 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
   .div:nth-child(2){border-right:0}
   .div:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
   .div:nth-child(4){border-top:1px solid var(--line)}
-  .l000 .mark,.l000 .txt,.border h2,.border .cols,.osv h2,.osv .ct{grid-column:1/13}
+  .l000 .mark,.l000 .txt,.border h2,.border .cols,.osv-h,.osv .ct{grid-column:1/13}
   .l000 .mark{max-width:420px}
-  .marks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .f-a,.f-c,.f-d,.f-b{grid-column:1/13}
+  .f-c img{max-width:46%}
 }
 @media (max-width:620px){
-  .divs,.axes,.brb .steps,.rules,.facts{grid-template-columns:minmax(0,1fr)}
+  .divs,.axes,.brb .steps,.facts{grid-template-columns:minmax(0,1fr)}
   .div,.div+.div,.div:nth-child(3){padding:18px 0 22px;border-right:0;border-top:1px solid var(--line)}
   .div:first-child{border-top:0}
   .axes div,.axes div+div{padding:16px 0 4px;border-left:0}
@@ -188,9 +184,9 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
     </a>
     <nav aria-label="Divisions">
       <a href="#lab">LAB <span>/ Research</span></a>
-      <a href="#divisions">ADD <span>/ Design</span></a>
+      <a href="#divisions">ADD <span>/ Opening soon</span></a>
       <a href="#divisions">WTF <span>/ Workshop</span></a>
-      <a href="#osv">OSV <span>/ Contact</span></a>
+      <a href="#osv">OSV <span>/ Operational System View</span></a>
     </nav>
   </div>
 </header>
@@ -219,14 +215,14 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
         <span class="code">LAB</span>
         <span class="name">NPF / LAB</span>
         <p>Experiments in material, motion and form. Where questions are built before they are answered.</p>
-        <span class="go">→ L000 Big Slurp</span>
+        <span class="go">→ LAB_001 Big Slurp</span>
       </a>
       <a class="div" href="#index">
         <span class="label">Design</span>
         <span class="code">ADD</span>
         <span class="name">Applied Design Division</span>
         <p>Products, furniture, interiors and applied concepts. Research turned into objects people use.</p>
-        <span class="go">→ Index</span>
+        <span class="go"><span class="tag">Opening soon</span></span>
       </a>
       <a class="div" href="#index">
         <span class="label">Workshop</span>
@@ -236,7 +232,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
         <span class="go">→ Index</span>
       </a>
       <a class="div" href="#osv">
-        <span class="label">Contact</span>
+        <span class="label">Overview &amp; contact</span>
         <span class="code">OSV</span>
         <span class="name">Operational System View</span>
         <p>Project overview, contact and the way into the practice. Start here with a brief or a question.</p>
@@ -254,7 +250,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
       <div class="grid">
         <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="Big Slurp, turning"><g class="spin"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></g></svg>
         <div class="txt">
-          <span class="label">L000</span>
+          <span class="label">LAB_001</span>
           <h2>Big Slurp</h2>
           <p class="sub">A never-ending well of curiosity.</p>
           <div class="myth">
@@ -265,12 +261,23 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
           </div>
           <p class="verse">Life is the wine you drink.<br>The cup refills from its own Slurp.</p>
           <div class="facts">
-            <div><span class="label">Opened</span><b>Before L001</b></div>
+            <div><span class="label">Opened</span><b>Before everything</b></div>
             <div><span class="label">Depth</span><b>Unmeasured</b></div>
             <div><span class="label">State</span><b>Turning</b></div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="wrap sec studies" id="studies">
+    <div class="sec-head"><h2>LAB_001<br>Mesh studies</h2><span class="label">Open torus — torsion, ridges, generations</span></div>
+    <div class="grid">
+      <figure class="fig f-a"><div class="pane"><img src="assets/lab001/A_torsion.svg" alt="Wireframe of an open torus with torsion: the meridians spiral into the throat" loading="lazy" width="853" height="796"></div><figcaption><b>Torsion</b>The open torus twisted, so every meridian spirals into the throat.</figcaption></figure>
+      <figure class="fig f-c"><div class="pane"><img src="assets/lab001/C_generations.svg" alt="Five generations of open tori, each emerging from the throat of the one before" loading="lazy" width="625" height="897"></div><figcaption><b>Big Spit</b>Every generation shoots out of the last one’s throat, turning the other way.</figcaption></figure>
+      <figure class="fig f-d"><div class="pane"><img src="assets/lab001/D_grid.svg" alt="Grid of nine open tori: torsion increases down the rows, ridges across the columns" loading="lazy" width="626" height="573"></div><figcaption><b>Torus grid</b>Torsion 0 → 1 down the rows. Ridges 0 → 6 → 12 across. One surface, nine temperaments.</figcaption></figure>
+      <figure class="fig f-b"><div class="pane"><img src="assets/lab001/B_ridges.svg" alt="Open torus with nine ridges running around its axis" loading="lazy" width="856" height="807"></div><figcaption><b>Ridges</b>Nine ridges run around the axis. The surface folds and still closes on itself.</figcaption></figure>
+      <div class="dl"><span class="label">Never still. Never fully in balance. Never fully out of it.</span><a href="assets/NPF_one_pager.pdf" download>One pager — PDF ↓</a></div>
     </div>
   </section>
 
@@ -309,36 +316,18 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
       <table class="idx">
         <thead><tr><th>No.</th><th>Project</th><th>Division</th><th>Type</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="c">L000</td><td class="t">Big Slurp</td><td class="c">LAB</td><td>The source</td><td><span class="tag live">Continuous</span></td></tr>
-          <tr><td class="c">ADD002</td><td class="t">Pure Optical Emergence</td><td class="c">ADD</td><td>Light sculpture, etched glass</td><td><span class="tag">In development</span></td></tr>
+          <tr><td class="c">LAB_001</td><td class="t">Big Slurp</td><td class="c">LAB</td><td>The source</td><td><span class="tag live">Continuous</span></td></tr>
+          <tr><td class="c">ADD002</td><td class="t">Pure Optical Emergence</td><td class="c">ADD</td><td>Light sculpture, etched glass</td><td><span class="tag">Opening soon</span></td></tr>
           <tr><td class="c">WTF—</td><td class="t">Commissioned builds</td><td class="c">WTF</td><td>Set design, windows, installations</td><td><span class="tag">Archive in progress</span></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <section class="wrap sec rule" id="identity">
-    <div class="sec-head"><h2>The mark</h2><span class="label">Identity / Logo set</span></div>
-    <div class="marks">
-      <div class="tile"><div class="face"><svg class="sw" viewBox="-102 -102 204 204"  aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">01 Symbol — positive</span></div>
-      <div class="tile"><div class="face inv"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">02 Symbol — negative</span></div>
-      <div class="tile"><div class="face or"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">03 Symbol — on orange</span></div>
-      <div class="tile"><div class="face"><svg class="sw line" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div><span class="label">04 Symbol — line, for etching and laser</span></div>
-      <div class="tile"><div class="face"><span class="word">NPF</span></div><span class="label">05 Wordmark</span></div>
-      <div class="tile"><div class="face inv"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>NPF</span></div><span class="label">06 Lockup — primary</span></div>
-      <div class="tile"><div class="face"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>NPF<span class="sl">/</span>LAB</span></div><span class="label">07 Division lockup</span></div>
-      <div class="tile"><div class="face"><span class="stack"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg><span>NPF</span><small>New Physical Forms</small></span></div><span class="label">08 Stacked lockup</span></div>
-    </div>
-    <div class="rules">
-      <div><b>Use the original</b>The swirl is always placed from the master file. Never redrawn, stretched, mirrored or rotated to a new resting angle.</div>
-      <div><b>Divisions follow the slash</b>NPF / LAB, NPF / ADD, NPF / WTF, NPF / OSV. Same weight, same size. No separate logos.</div>
-      <div><b>Colour</b>Ink on paper, paper on ink, or ink on orange. Orange is a ground for the mark, never the mark on grey.</div>
-    </div>
-  </section>
 
   <section class="osv sec" id="osv">
     <div class="wrap grid">
-      <h2>OSV<br>Start here.</h2>
+      <div class="osv-h"><h2>OSV</h2><p class="osv-sub">Operational System View</p><h2>Start here.</h2></div>
       <div class="ct">
         <span class="label">Projects, commissions, collaborations</span>
         <span class="mail" id="mail">studio@npf.house</span>
