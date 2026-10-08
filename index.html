@@ -1,527 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPF - New Physical Forms</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --accent-orange: #FF6B35;
-            --bg-gray: #F8F8F8;
-            --border-color: #D0D0D0;
-            --text-black: #000000;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-gray);
-            color: var(--text-black);
-            line-height: 1.6;
-        }
-        
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(248, 248, 248, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 20px 40px;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--text-black);
-            font-weight: 400;
-            font-size: 14px;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
-            opacity: 0.6;
-        }
-        
-        nav a:hover {
-            opacity: 1;
-            color: var(--accent-orange);
-        }
-        
-        nav a.active {
-            opacity: 1;
-            color: var(--accent-orange);
-            font-weight: 500;
-        }
-        
-        .logo {
-            font-weight: 600 !important;
-            font-size: 16px !important;
-            margin-right: auto;
-            opacity: 1 !important;
-            color: var(--text-black) !important;
-        }
-        
-        section {
-            min-height: 100vh;
-            padding: 120px 40px 80px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        h1 {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-        
-        h2 {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            color: var(--accent-orange);
-        }
-        
-        h3 {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
-        
-        p {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.8;
-            max-width: 700px;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-        
-        .card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
-        
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.15);
-        }
-        
-        .card-image {
-            width: 100%;
-            height: 400px;
-            background: #e8e8e8;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
-        
-        .card-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .card:hover .card-image img {
-            transform: scale(1.05);
-        }
-        
-        .card-content {
-            padding: 20px;
-            background: #ffffff;
-        }
-        
-        .card-number {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            color: var(--accent-orange);
-        }
-        
-        .project {
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .project:nth-child(1) { animation-delay: 0.1s; }
-        .project:nth-child(2) { animation-delay: 0.2s; }
-        
-        .project:last-child {
-            border-bottom: none;
-        }
-        
-        .project-title {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .project-status {
-            font-size: 12px;
-            font-weight: 400;
-            color: #666;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-        
-        .loop-diagram {
-            margin: 60px auto;
-            text-align: center;
-            max-width: 600px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.2s;
-        }
-        
-        .loop-text {
-            font-size: 36px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: var(--accent-orange);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 60px;
-            margin-top: 60px;
-        }
-        
-        .contact-section {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .contact-section:nth-child(1) { animation-delay: 0.1s; }
-        .contact-section:nth-child(2) { animation-delay: 0.2s; }
-        .contact-section:nth-child(3) { animation-delay: 0.3s; }
-        
-        .division-links {
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        
-        .division-link {
-            text-decoration: none;
-            color: var(--text-black);
-            font-size: 16px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            display: block;
-            line-height: 1.8;
-        }
-        
-        .division-link:hover {
-            color: var(--accent-orange);
-            transform: translateX(10px);
-        }
-        
-        .division-link strong {
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--accent-orange);
-        }
-        
-        .contact-section p {
-            font-size: 14px;
-            line-height: 2;
-        }
-        
-        /* Image placeholder styling */
-        .img-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: #999;
-            letter-spacing: 1px;
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-            
-            section {
-                padding: 100px 20px 60px;
-            }
-            
-            h1 {
-                font-size: 32px;
-            }
-            
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .loop-text {
-                font-size: 24px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="NPF — New Physical Forms. Research, design and fabrication in Stockholm.">
+<title>NPF.house</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: strict 12-column Swiss grid, hairline rules, one orange accent, the Slurp as the only image-like object */
+:root{
+  --paper:#E6E5E2; --paper-2:#DCDBD7; --ink:#0D0D0C; --muted:#5B5954;
+  --line:rgba(13,13,12,.18); --orange:#FF6B35; --orange-ink:#C2410C;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --g:clamp(16px,3vw,40px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111110; --paper-2:#1A1A18; --ink:#ECEAE6; --muted:#9C988F;
+  --line:rgba(236,234,230,.16); --orange-ink:#FF8A5C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111110; --paper-2:#1A1A18; --ink:#ECEAE6; --muted:#9C988F;
+  --line:rgba(236,234,230,.16); --orange-ink:#FF8A5C; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11"}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:var(--g)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rule{border-top:1px solid var(--line)}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.035em;line-height:.92;text-wrap:balance}
+p{margin:0}
+.dot{display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--orange);vertical-align:.08em}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.02em}
+.brand svg{width:28px;height:28px}
+.sw{fill:currentColor;display:block}
+.sw.line{fill:none;stroke:currentColor;stroke-width:1.1}
+.tile .face.or{background:var(--orange);border-color:var(--orange);color:#0D0D0C}
+.stack{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%}
+.stack svg{width:56%!important}
+.stack span{font-weight:900;letter-spacing:-.05em;font-size:clamp(24px,2.6vw,38px);line-height:1}
+.stack small{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+nav{display:flex;gap:clamp(12px,2.4vw,32px);flex-wrap:wrap}
+nav a{text-decoration:none;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em}
+nav a span{color:var(--muted)}
+nav a:hover{color:var(--orange-ink)}
+
+/* hero */
+.hero{padding-block:clamp(40px,8vw,110px) clamp(32px,5vw,64px)}
+.hero h1{grid-column:1/9;font-size:clamp(56px,11.5vw,184px);font-weight:900;letter-spacing:-.055em}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .mark{grid-column:9/13;align-self:end;justify-self:end;width:100%;max-width:340px;aspect-ratio:1}
+.hero .meta{grid-column:1/13;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g);margin-top:clamp(28px,4vw,56px);padding-top:16px;border-top:1px solid var(--ink)}
+.hero .meta>*{grid-column:span 3;min-width:0}
+.hero .meta .lede{grid-column:span 6;font-size:clamp(18px,1.7vw,22px);line-height:1.4;letter-spacing:-.01em;max-width:40ch}
+
+/* divisions */
+.sec{padding-block:clamp(56px,8vw,120px)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:clamp(28px,4vw,48px);flex-wrap:wrap}
+.sec-head h2{font-size:clamp(34px,5vw,72px)}
+.divs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink)}
+.div{padding:20px 20px 28px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;min-width:0;text-decoration:none}
+.div+.div{padding-left:20px}
+.div:last-child{border-right:0}
+.div .code{font-size:clamp(56px,7vw,112px);font-weight:900;letter-spacing:-.06em;line-height:.85}
+.div .name{font-weight:600;letter-spacing:-.01em}
+.div p{color:var(--muted);font-size:15px;max-width:30ch}
+.div .go{margin-top:auto;font-family:var(--mono);font-size:12px}
+.div:hover .code{color:var(--orange)}
+
+/* L000 */
+.l000{background:var(--ink);color:var(--paper)}
+.l000 .label{color:color-mix(in srgb,var(--paper) 62%,transparent)}
+.l000 .grid{row-gap:32px}
+.l000 .mark{grid-column:1/7;width:100%;max-width:560px;aspect-ratio:1;color:var(--paper)}
+.l000 .txt{grid-column:7/13;align-self:center;display:flex;flex-direction:column;gap:22px;min-width:0}
+.l000 h2{font-size:clamp(52px,8.5vw,140px);font-weight:900;letter-spacing:-.055em}
+.l000 .sub{font-size:clamp(20px,2vw,28px);font-weight:300;letter-spacing:-.015em;line-height:1.25;max-width:24ch}
+.l000 .myth{display:flex;flex-direction:column;gap:14px;max-width:40ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:color-mix(in srgb,var(--paper) 78%,transparent)}
+.l000 .myth p:nth-child(2){color:var(--paper)}
+.l000 .verse{font-weight:300;font-size:clamp(18px,1.6vw,23px);letter-spacing:-.01em;line-height:1.35;padding-left:16px;border-left:2px solid var(--orange)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid color-mix(in srgb,var(--paper) 30%,transparent);padding-top:14px;gap:16px}
+.facts b{display:block;font-weight:500;font-size:15px}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* borderlands */
+.border .grid{row-gap:28px}
+.border h2{grid-column:1/6;font-size:clamp(38px,5.2vw,80px)}
+.border .cols{grid-column:7/13;display:flex;flex-direction:column;gap:20px;font-size:clamp(17px,1.35vw,19px);max-width:62ch}
+.border .cols p:first-child{font-size:clamp(20px,1.9vw,26px);line-height:1.35;letter-spacing:-.012em}
+.axes{grid-column:1/13;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink);margin-top:clamp(20px,3vw,40px)}
+.axes div{padding:18px 20px 0 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.axes div+div{padding-left:20px;border-left:1px solid var(--line)}
+.axes h3{font-size:clamp(26px,2.6vw,38px)}
+.axes p{color:var(--muted);font-size:15px;max-width:34ch}
+
+/* BRB */
+.brb{background:var(--paper-2)}
+.brb .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g)}
+.brb .step{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.brb .step h3{font-size:clamp(44px,5.5vw,88px);font-weight:900}
+.brb .step:nth-child(2) h3{color:var(--orange)}
+.brb .step p{color:var(--muted);max-width:34ch}
+
+/* index */
+.idx{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.idx-wrap{overflow-x:auto}
+.idx th{text-align:left;font-family:var(--mono);font-weight:400;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 16px 10px 0;border-bottom:1px solid var(--ink)}
+.idx td{padding:18px 16px 18px 0;border-bottom:1px solid var(--line);vertical-align:baseline;white-space:nowrap}
+.idx td.t{font-weight:600;font-size:clamp(18px,1.6vw,24px);letter-spacing:-.02em;white-space:normal;min-width:220px}
+.idx td.c{font-family:var(--mono);font-size:13px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;border:1px solid var(--ink);border-radius:99px;padding:2px 8px}
+.tag.live{background:var(--orange);border-color:var(--orange);color:#0D0D0C}
+
+/* identity */
+.marks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--g)}
+.tile{display:flex;flex-direction:column;gap:12px;min-width:0}
+.tile .face{aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--line);padding:14%}
+.tile .face.inv{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tile .face svg{width:100%;height:auto;overflow:visible}
+.word{font-weight:900;letter-spacing:-.06em;font-size:clamp(48px,6vw,92px);line-height:.8}
+.lock{display:flex;align-items:center;gap:.28em;font-weight:900;letter-spacing:-.05em;font-size:clamp(28px,3vw,44px);line-height:1}
+.lock svg{width:1.05em;height:1.05em;flex:none}
+.lock .sl{font-weight:300;color:var(--muted)}
+.tile .face.inv .lock .sl{color:color-mix(in srgb,var(--paper) 55%,transparent)}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--g);margin-top:clamp(28px,4vw,48px)}
+.rules div{border-top:1px solid var(--line);padding-top:12px;font-size:15px;color:var(--muted);min-width:0}
+.rules b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+
+/* OSV */
+.osv{border-top:1px solid var(--ink)}
+.osv .grid{row-gap:28px}
+.osv h2{grid-column:1/8;font-size:clamp(44px,7vw,112px);font-weight:900}
+.osv .ct{grid-column:9/13;display:flex;flex-direction:column;gap:18px;font-size:17px}
+.osv .ct .mail{font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-.02em;user-select:all}
+.copy{font-family:var(--mono);font-size:12px;background:none;border:1px solid var(--ink);color:var(--ink);padding:6px 10px;cursor:pointer;align-self:flex-start}
+.copy:hover{background:var(--ink);color:var(--paper)}
+footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line)}
+
+@media (max-width:1000px){
+  .hero h1{grid-column:1/13}
+  .hero .mark{grid-column:1/13;justify-self:start;max-width:220px;margin-top:24px}
+  .hero .meta>*{grid-column:span 6}
+  .hero .meta .lede{grid-column:1/13;margin-bottom:12px}
+  .divs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .div:nth-child(2){border-right:0}
+  .div:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
+  .div:nth-child(4){border-top:1px solid var(--line)}
+  .l000 .mark,.l000 .txt,.border h2,.border .cols,.osv h2,.osv .ct{grid-column:1/13}
+  .l000 .mark{max-width:420px}
+  .marks{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  .divs,.axes,.brb .steps,.rules,.facts{grid-template-columns:minmax(0,1fr)}
+  .div,.div+.div,.div:nth-child(3){padding:18px 0 22px;border-right:0;border-top:1px solid var(--line)}
+  .div:first-child{border-top:0}
+  .axes div,.axes div+div{padding:16px 0 4px;border-left:0}
+  .axes div+div{border-top:1px solid var(--line)}
+  nav a span{display:none}
+}
+@media (prefers-reduced-motion:reduce){.spin{animation:none!important}.status i{animation:none}}
+.spin{transform-box:fill-box;transform-origin:center;animation:rot 60s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+</style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#home" class="logo">NPF</a></li>
-            <li><a href="#wtf" data-section="wtf">WTF</a></li>
-            <li><a href="#add" data-section="add">ADD</a></li>
-            <li><a href="#lab" data-section="lab">LAB</a></li>
-            <li><a href="#brb" data-section="brb">BRB</a></li>
-            <li><a href="#osv" data-section="osv">OSV</a></li>
-        </ul>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="slurp" viewBox="-102 -102 204 204"><path d="M 4.44 -100.00 L 2.71 -100.00 L 4.65 -99.78 L 8.55 -98.48 L 9.20 -98.48 L 9.85 -98.05 L 11.58 -97.62 L 12.23 -97.19 L 14.83 -96.32 L 16.77 -95.24 L 17.21 -95.24 L 18.51 -94.59 L 18.94 -94.15 L 21.97 -92.64 L 23.70 -91.34 L 24.35 -91.12 L 31.06 -85.93 L 36.69 -80.30 L 40.37 -75.75 L 41.23 -74.24 L 42.75 -72.29 L 42.97 -71.65 L 44.69 -69.05 L 45.13 -67.96 L 45.56 -67.53 L 48.38 -61.47 L 50.76 -54.33 L 50.76 -53.68 L 51.41 -51.73 L 51.41 -50.86 L 51.84 -49.78 L 51.84 -48.70 L 52.27 -47.40 L 52.27 -46.10 L 52.49 -45.89 L 52.70 -41.56 L 52.92 -41.34 L 52.92 -34.85 L 52.70 -34.63 L 52.49 -30.52 L 52.27 -30.30 L 52.27 -29.00 L 52.06 -28.79 L 51.62 -25.76 L 51.41 -25.54 L 50.97 -23.16 L 50.54 -22.30 L 50.54 -21.65 L 49.89 -20.35 L 49.03 -17.53 L 48.16 -16.02 L 48.16 -15.59 L 46.21 -11.90 L 44.26 -8.87 L 40.58 -4.33 L 36.69 -0.65 L 31.06 3.25 L 25.43 5.85 L 22.83 6.71 L 21.32 6.93 L 21.10 7.15 L 20.67 6.93 L 21.10 6.49 L 22.62 5.85 L 26.73 2.38 L 26.73 2.16 L 29.33 -0.65 L 32.14 -4.76 L 33.44 -7.58 L 34.09 -8.44 L 34.09 -8.87 L 35.17 -11.04 L 35.39 -12.12 L 35.82 -12.77 L 36.47 -14.72 L 36.47 -15.37 L 37.55 -18.61 L 37.55 -19.48 L 37.77 -19.70 L 37.77 -20.56 L 38.20 -21.86 L 38.42 -24.67 L 38.63 -24.89 L 38.85 -29.87 L 39.07 -30.09 L 39.07 -36.58 L 38.85 -36.80 L 38.63 -41.56 L 38.42 -41.77 L 38.42 -43.07 L 38.20 -43.29 L 38.20 -44.37 L 37.98 -44.59 L 37.77 -46.54 L 37.55 -46.75 L 37.12 -49.14 L 36.69 -50.00 L 36.69 -50.65 L 35.82 -53.25 L 34.09 -56.92 L 34.09 -57.36 L 33.23 -58.65 L 32.36 -60.60 L 28.89 -65.58 L 23.05 -71.65 L 19.37 -74.46 L 14.18 -77.70 L 9.85 -79.87 L 9.42 -79.87 L 8.33 -80.52 L 6.17 -81.17 L 5.52 -81.60 L 2.92 -82.46 L 2.27 -82.46 L 1.41 -82.90 L 0.76 -82.90 L -0.11 -83.33 L -1.62 -83.55 L -1.84 -83.76 L -2.71 -83.76 L -2.92 -83.98 L -3.79 -83.98 L -5.08 -84.41 L -6.17 -84.41 L -6.38 -84.63 L -7.47 -84.63 L -7.68 -84.85 L -8.98 -84.85 L -9.20 -85.06 L -13.74 -85.28 L -13.96 -85.50 L -23.05 -85.50 L -23.27 -85.28 L -27.81 -85.06 L -28.03 -84.85 L -31.06 -84.63 L -31.28 -84.41 L -32.36 -84.41 L -32.58 -84.20 L -36.69 -83.55 L -36.90 -83.33 L -39.28 -82.90 L -40.15 -82.46 L -41.67 -82.25 L -46.21 -80.73 L -46.86 -80.30 L -47.94 -80.09 L -51.19 -78.57 L -51.62 -78.57 L -53.14 -77.70 L -53.57 -77.70 L -59.85 -74.46 L -60.93 -73.59 L -64.39 -71.65 L -71.97 -66.02 L -75.22 -62.99 L -75.43 -62.99 L -80.41 -58.01 L -84.95 -52.60 L -88.85 -46.75 L -85.61 -50.86 L -80.19 -56.28 L -73.92 -61.47 L -72.40 -62.34 L -69.80 -64.29 L -66.56 -66.02 L -66.13 -66.45 L -57.90 -70.35 L -52.06 -72.29 L -50.32 -72.51 L -49.24 -72.94 L -48.38 -72.94 L -48.16 -73.16 L -47.29 -73.16 L -45.99 -73.59 L -44.69 -73.59 L -44.48 -73.81 L -40.15 -74.02 L -39.93 -74.24 L -33.87 -74.24 L -33.66 -74.02 L -31.06 -74.02 L -30.84 -73.81 L -29.33 -73.81 L -29.11 -73.59 L -27.81 -73.59 L -27.60 -73.38 L -25.22 -73.16 L -24.13 -72.73 L -23.27 -72.73 L -23.05 -72.51 L -20.67 -72.08 L -16.77 -70.78 L -16.13 -70.35 L -15.04 -70.13 L -11.58 -68.40 L -11.15 -68.40 L -9.85 -67.53 L -7.47 -66.45 L -1.84 -62.77 L 3.14 -58.65 L 6.38 -55.41 L 10.50 -50.43 L 12.66 -47.19 L 15.48 -41.77 L 15.48 -41.34 L 15.91 -40.69 L 15.91 -40.26 L 16.34 -39.61 L 16.34 -39.18 L 17.21 -37.23 L 17.21 -36.58 L 18.07 -33.98 L 18.29 -32.03 L 18.51 -31.82 L 18.72 -27.92 L 18.94 -27.70 L 18.72 -21.86 L 18.51 -21.65 L 18.07 -18.18 L 17.86 -17.96 L 17.86 -17.32 L 17.21 -15.37 L 16.99 -15.15 L 16.77 -15.37 L 16.77 -18.40 L 16.56 -18.61 L 16.56 -19.91 L 16.34 -20.13 L 16.34 -20.78 L 16.13 -21.00 L 16.13 -21.65 L 15.91 -21.86 L 15.91 -22.51 L 15.69 -22.73 L 15.69 -23.38 L 15.04 -25.32 L 12.88 -30.09 L 12.44 -30.52 L 10.93 -33.33 L 8.55 -36.58 L 3.36 -41.99 L -0.11 -44.80 L -3.36 -46.97 L -8.98 -50.00 L -9.42 -50.00 L -12.66 -51.51 L -15.91 -52.60 L -16.56 -52.60 L -17.42 -53.03 L -18.07 -53.03 L -18.29 -53.25 L -18.94 -53.25 L -20.88 -53.90 L -22.83 -54.11 L -23.05 -54.33 L -24.35 -54.33 L -24.57 -54.55 L -25.65 -54.55 L -25.87 -54.76 L -27.60 -54.76 L -27.81 -54.98 L -30.84 -54.98 L -31.06 -55.20 L -36.90 -55.20 L -37.12 -54.98 L -39.72 -54.98 L -39.93 -54.76 L -41.45 -54.76 L -41.67 -54.55 L -42.97 -54.55 L -43.18 -54.33 L -45.35 -54.11 L -45.56 -53.90 L -47.94 -53.46 L -48.81 -53.03 L -49.46 -53.03 L -52.06 -52.16 L -53.79 -51.30 L -54.22 -51.30 L -60.93 -48.05 L -61.36 -47.62 L -63.09 -46.75 L -67.86 -43.50 L -73.48 -38.74 L -76.51 -35.71 L -76.51 -35.50 L -80.63 -30.95 L -85.17 -24.46 L -87.12 -20.78 L -87.55 -20.35 L -89.72 -16.02 L -89.72 -15.59 L -91.88 -10.60 L -92.96 -7.36 L -92.96 -6.71 L -93.61 -5.20 L -93.61 -4.55 L -94.26 -2.60 L -94.26 -1.73 L -94.48 -1.51 L -94.48 -0.65 L -94.91 0.43 L -94.91 1.51 L -95.13 1.73 L -95.13 2.81 L -95.34 3.03 L -95.34 4.33 L -95.56 4.55 L -95.56 6.06 L -95.78 6.28 L -95.78 8.01 L -95.99 8.22 L -95.99 11.04 L -96.21 11.25 L -96.21 17.96 L -95.99 18.18 L -95.99 21.00 L -95.78 21.21 L -95.78 23.16 L -95.56 23.38 L -95.56 24.89 L -95.34 25.11 L -95.13 27.70 L -94.91 27.92 L -94.69 29.87 L -94.48 30.09 L -94.26 31.82 L -93.83 32.68 L -93.61 34.20 L -92.96 35.71 L -92.96 36.36 L -92.10 38.96 L -91.67 39.61 L -90.80 42.21 L -91.23 40.91 L -91.23 40.26 L -91.45 40.04 L -91.45 39.40 L -91.67 39.18 L -91.88 37.23 L -92.10 37.01 L -92.10 35.93 L -92.32 35.71 L -92.32 34.63 L -92.53 34.41 L -92.53 32.90 L -92.75 32.68 L -92.75 30.52 L -92.96 30.30 L -92.96 22.08 L -92.75 21.86 L -92.75 19.70 L -92.53 19.48 L -92.53 17.96 L -92.32 17.75 L -92.10 15.37 L -91.88 15.15 L -91.88 14.29 L -91.67 14.07 L -90.80 9.95 L -89.50 6.06 L -89.07 5.41 L -88.85 4.33 L -87.98 2.81 L -87.98 2.38 L -85.82 -1.95 L -83.01 -6.49 L -78.24 -12.55 L -73.27 -17.53 L -70.45 -19.91 L -63.74 -24.67 L -55.95 -28.79 L -55.52 -28.79 L -52.70 -30.09 L -50.97 -30.52 L -50.32 -30.95 L -49.68 -30.95 L -46.64 -32.03 L -44.91 -32.25 L -43.83 -32.68 L -42.75 -32.68 L -42.53 -32.90 L -41.45 -32.90 L -41.23 -33.12 L -39.93 -33.12 L -39.72 -33.33 L -37.77 -33.33 L -37.55 -33.55 L -31.28 -33.55 L -31.06 -33.33 L -29.11 -33.33 L -28.89 -33.12 L -27.81 -33.12 L -27.60 -32.90 L -26.73 -32.90 L -26.52 -32.68 L -25.65 -32.68 L -25.43 -32.47 L -23.05 -32.03 L -21.10 -31.17 L -20.02 -30.95 L -19.37 -30.52 L -18.94 -30.52 L -15.91 -29.00 L -15.48 -28.57 L -14.39 -28.14 L -12.01 -26.62 L -8.33 -23.81 L -6.38 -21.86 L -6.60 -21.65 L -9.20 -22.94 L -9.63 -22.94 L -11.58 -23.81 L -12.23 -23.81 L -14.18 -24.46 L -15.04 -24.46 L -15.26 -24.67 L -18.72 -24.89 L -18.94 -25.11 L -23.70 -25.11 L -23.92 -24.89 L -26.08 -24.89 L -26.30 -24.67 L -27.60 -24.67 L -27.81 -24.46 L -28.89 -24.46 L -29.11 -24.24 L -31.06 -24.03 L -31.28 -23.81 L -31.93 -23.81 L -34.31 -22.94 L -35.61 -22.73 L -36.25 -22.30 L -40.15 -21.00 L -42.10 -19.91 L -42.53 -19.91 L -48.16 -16.88 L -54.43 -12.55 L -57.03 -10.39 L -63.74 -3.46 L -67.42 1.73 L -70.24 6.93 L -70.24 7.36 L -71.10 8.87 L -71.32 9.95 L -72.18 11.90 L -72.18 12.55 L -72.62 13.42 L -72.62 14.07 L -73.05 15.15 L -73.05 16.02 L -73.27 16.23 L -73.27 17.32 L -73.48 17.53 L -73.48 18.61 L -73.70 18.83 L -73.70 20.35 L -73.92 20.56 L -74.13 27.27 L -73.92 27.49 L -73.70 32.68 L -73.48 32.90 L -73.48 34.20 L -73.27 34.41 L -73.27 35.50 L -73.05 35.71 L -73.05 36.58 L -72.62 37.66 L -72.40 39.61 L -71.97 40.47 L -71.53 42.64 L -70.02 47.19 L -68.51 50.43 L -68.51 50.86 L -67.42 52.81 L -67.42 53.25 L -66.77 54.55 L -66.34 54.98 L -65.04 57.79 L -64.61 58.22 L -63.09 61.04 L -58.33 67.75 L -53.57 73.38 L -49.03 77.92 L -48.81 77.92 L -46.64 80.09 L -42.97 83.12 L -35.61 88.31 L -30.84 90.90 L -30.41 91.34 L -21.54 95.45 L -20.45 95.67 L -19.81 96.10 L -14.61 97.83 L -13.96 97.83 L -13.74 98.05 L -13.09 98.05 L -12.88 98.27 L -12.23 98.27 L -10.28 98.91 L -8.12 99.13 L -7.90 99.35 L -5.73 99.56 L -5.52 99.78 L -4.00 99.78 L -3.79 100.00 L -3.36 100.00 L -7.47 99.13 L -12.66 97.40 L -13.31 96.97 L -15.91 96.10 L -21.54 93.29 L -28.25 88.96 L -33.01 85.06 L -39.28 78.57 L -42.75 74.02 L -45.13 70.35 L -46.43 67.75 L -46.86 67.31 L -49.24 62.34 L -52.06 54.11 L -52.06 53.46 L -52.49 52.38 L -52.49 51.51 L -52.70 51.30 L -52.70 50.43 L -52.92 50.21 L -52.92 49.35 L -53.14 49.14 L -53.14 48.27 L -53.36 48.05 L -53.57 45.02 L -53.79 44.80 L -53.79 42.42 L -54.00 42.21 L -54.00 34.85 L -53.79 34.63 L -53.57 30.74 L -53.36 30.52 L -53.36 29.44 L -53.14 29.22 L -52.70 26.19 L -52.49 25.97 L -52.27 24.46 L -51.84 23.59 L -51.84 22.94 L -51.19 21.00 L -50.76 20.35 L -50.11 18.18 L -47.73 13.42 L -47.29 12.99 L -45.99 10.60 L -43.40 7.15 L -41.88 5.63 L -41.88 5.41 L -37.77 1.51 L -32.14 -2.38 L -26.52 -4.98 L -25.22 -5.41 L -24.57 -5.41 L -23.70 -5.85 L -23.05 -5.85 L -22.83 -6.06 L -21.10 -6.28 L -20.88 -6.49 L -20.45 -6.28 L -20.88 -5.85 L -22.40 -5.20 L -23.70 -4.33 L -26.08 -2.38 L -27.81 -0.65 L -30.63 2.81 L -34.09 8.66 L -34.09 9.09 L -35.17 11.04 L -35.17 11.47 L -35.61 12.12 L -35.61 12.55 L -36.04 13.20 L -36.90 15.80 L -36.90 16.45 L -37.34 17.32 L -37.34 17.96 L -37.77 19.05 L -37.77 19.91 L -38.20 21.00 L -38.42 23.16 L -38.63 23.38 L -38.85 26.62 L -39.07 26.84 L -39.07 29.65 L -39.28 29.87 L -39.28 35.93 L -39.07 36.15 L -38.85 40.47 L -38.63 40.69 L -38.42 43.07 L -38.20 43.29 L -38.20 44.15 L -37.98 44.37 L -37.12 48.48 L -36.25 51.08 L -35.82 51.73 L -35.61 52.81 L -32.79 58.65 L -30.63 62.12 L -27.38 66.23 L -23.27 70.35 L -18.94 73.81 L -13.74 77.05 L -9.85 79.00 L -9.42 79.00 L -6.17 80.52 L -2.27 81.82 L -1.62 81.82 L -0.76 82.25 L 1.62 82.68 L 1.84 82.90 L 2.71 82.90 L 2.92 83.12 L 3.79 83.12 L 5.09 83.55 L 7.90 83.76 L 8.12 83.98 L 12.01 84.20 L 12.23 84.41 L 23.92 84.41 L 24.13 84.20 L 26.30 84.20 L 26.52 83.98 L 29.76 83.76 L 29.98 83.55 L 31.06 83.55 L 31.28 83.33 L 32.36 83.33 L 32.58 83.12 L 36.69 82.46 L 36.90 82.25 L 40.15 81.60 L 41.02 81.17 L 41.67 81.17 L 43.18 80.52 L 43.83 80.52 L 45.78 79.87 L 46.43 79.44 L 48.16 79.00 L 48.81 78.57 L 51.41 77.70 L 52.49 77.05 L 52.92 77.05 L 54.43 76.19 L 54.87 76.19 L 62.66 72.08 L 70.02 67.31 L 75.87 62.77 L 78.89 59.95 L 79.11 59.95 L 82.36 56.71 L 82.58 56.71 L 86.68 52.38 L 91.67 46.32 L 95.56 40.69 L 92.32 44.59 L 87.12 49.78 L 86.90 49.78 L 83.66 52.81 L 76.73 58.01 L 70.88 61.69 L 69.80 62.12 L 69.37 62.55 L 60.71 66.66 L 60.28 66.66 L 59.63 67.10 L 57.90 67.53 L 57.25 67.96 L 54.65 68.83 L 54.00 68.83 L 53.14 69.26 L 52.49 69.26 L 49.89 70.13 L 49.03 70.13 L 48.81 70.35 L 47.94 70.35 L 47.73 70.56 L 46.86 70.56 L 45.56 71.00 L 42.32 71.21 L 42.10 71.43 L 39.93 71.43 L 39.72 71.65 L 30.84 71.65 L 30.63 71.43 L 26.73 71.21 L 26.52 71.00 L 25.43 71.00 L 25.22 70.78 L 24.13 70.78 L 23.92 70.56 L 21.97 70.35 L 20.88 69.91 L 20.02 69.91 L 19.16 69.48 L 18.51 69.48 L 17.64 69.05 L 16.99 69.05 L 15.04 68.40 L 14.39 67.96 L 11.15 66.88 L 3.36 62.77 L -2.49 58.44 L -4.00 56.92 L -4.22 56.92 L -8.55 52.38 L -12.44 46.97 L -12.88 45.89 L -13.31 45.45 L -14.61 43.07 L -14.61 42.64 L -15.69 40.69 L -16.34 38.53 L -16.77 37.88 L -17.21 36.58 L -17.21 35.93 L -17.42 35.71 L -17.42 35.06 L -17.64 34.85 L -17.64 34.20 L -17.86 33.98 L -17.86 33.33 L -18.07 33.12 L -18.07 32.03 L -18.29 31.82 L -18.29 30.74 L -18.51 30.52 L -18.51 28.57 L -18.72 28.35 L -18.72 23.59 L -18.51 23.38 L -18.51 21.43 L -18.29 21.21 L -18.07 18.83 L -17.86 18.61 L -17.42 16.23 L -16.99 15.37 L -16.77 15.59 L -16.77 17.53 L -16.56 17.75 L -16.34 20.56 L -14.83 25.32 L -12.66 29.87 L -9.20 35.06 L -7.03 37.66 L -3.36 41.34 L -0.76 43.50 L 3.36 46.32 L 4.44 46.75 L 6.38 48.05 L 7.68 48.70 L 8.12 48.70 L 10.07 49.78 L 10.50 49.78 L 12.23 50.65 L 16.77 52.16 L 17.42 52.16 L 17.64 52.38 L 18.29 52.38 L 20.24 53.03 L 21.10 53.03 L 22.18 53.46 L 23.27 53.46 L 23.48 53.68 L 24.57 53.68 L 24.78 53.90 L 26.08 53.90 L 26.30 54.11 L 28.25 54.11 L 28.46 54.33 L 35.82 54.55 L 36.04 54.33 L 41.23 54.11 L 41.45 53.90 L 42.75 53.90 L 42.97 53.68 L 44.05 53.68 L 44.26 53.46 L 45.13 53.46 L 45.35 53.25 L 46.21 53.25 L 46.43 53.03 L 47.94 52.81 L 48.81 52.38 L 49.46 52.38 L 52.70 51.30 L 58.98 48.48 L 65.91 44.15 L 72.18 38.96 L 78.03 32.68 L 83.44 25.32 L 83.66 24.67 L 85.39 22.08 L 86.04 20.56 L 86.47 20.13 L 88.42 16.23 L 88.42 15.80 L 89.28 14.29 L 89.28 13.85 L 90.80 10.60 L 92.75 4.76 L 92.75 4.11 L 93.18 3.25 L 93.18 2.60 L 93.40 2.38 L 93.40 1.73 L 93.61 1.51 L 93.61 0.86 L 94.26 -1.08 L 94.26 -1.95 L 94.48 -2.16 L 94.48 -3.03 L 94.91 -4.33 L 94.91 -5.41 L 95.13 -5.63 L 95.34 -8.44 L 95.56 -8.66 L 95.78 -12.77 L 95.99 -12.99 L 95.99 -17.32 L 96.21 -17.53 L 95.99 -25.32 L 95.78 -25.54 L 95.56 -30.09 L 95.34 -30.30 L 95.13 -33.12 L 94.91 -33.33 L 94.91 -34.41 L 94.69 -34.63 L 94.69 -35.71 L 94.48 -35.93 L 94.26 -37.88 L 93.83 -38.96 L 93.83 -39.83 L 92.96 -42.42 L 92.75 -43.94 L 91.02 -49.14 L 90.58 -49.78 L 90.58 -50.21 L 91.02 -48.05 L 91.23 -47.84 L 91.23 -46.97 L 91.45 -46.75 L 91.67 -44.15 L 91.88 -43.94 L 91.88 -42.85 L 92.10 -42.64 L 92.10 -41.13 L 92.32 -40.91 L 92.53 -35.28 L 92.75 -35.06 L 92.75 -30.95 L 92.53 -30.74 L 92.53 -26.84 L 92.32 -26.62 L 92.10 -22.94 L 91.88 -22.73 L 91.88 -21.65 L 91.67 -21.43 L 91.67 -20.35 L 91.45 -20.13 L 91.02 -17.10 L 90.80 -16.88 L 90.37 -14.50 L 89.93 -13.64 L 89.93 -12.99 L 88.63 -9.09 L 87.12 -5.85 L 87.12 -5.41 L 82.79 2.81 L 79.54 7.58 L 76.73 11.04 L 74.57 13.20 L 74.57 13.42 L 69.59 18.18 L 64.83 21.86 L 62.23 23.59 L 55.52 27.27 L 55.09 27.27 L 54.00 27.92 L 53.57 27.92 L 51.41 29.00 L 49.68 29.44 L 49.03 29.87 L 47.73 30.09 L 46.86 30.52 L 46.21 30.52 L 45.35 30.95 L 44.69 30.95 L 43.62 31.39 L 42.75 31.39 L 42.53 31.60 L 41.67 31.60 L 41.45 31.82 L 38.85 32.03 L 38.63 32.25 L 36.47 32.25 L 36.25 32.47 L 30.41 32.47 L 30.19 32.25 L 28.25 32.25 L 28.03 32.03 L 26.73 32.03 L 26.52 31.82 L 24.35 31.60 L 24.13 31.39 L 21.75 30.95 L 20.24 30.30 L 19.59 30.30 L 17.86 29.44 L 16.77 29.22 L 13.31 27.49 L 9.63 25.11 L 6.60 22.73 L 6.82 22.30 L 8.33 23.16 L 9.42 23.38 L 11.37 24.24 L 13.10 24.46 L 14.18 24.89 L 17.42 25.11 L 17.64 25.32 L 23.70 25.32 L 23.92 25.11 L 27.38 24.89 L 27.60 24.67 L 30.63 24.24 L 33.23 23.38 L 33.87 23.38 L 37.12 22.30 L 37.77 21.86 L 38.85 21.65 L 39.50 21.21 L 39.93 21.21 L 46.86 17.75 L 53.36 13.42 L 55.73 11.47 L 57.68 9.52 L 57.90 9.52 L 61.58 5.63 L 63.96 2.60 L 66.13 -0.65 L 68.94 -6.06 L 68.94 -6.49 L 69.37 -7.15 L 69.59 -8.22 L 70.45 -10.17 L 70.67 -11.69 L 71.32 -13.42 L 71.53 -15.37 L 71.75 -15.59 L 71.75 -16.88 L 71.97 -17.10 L 71.97 -18.40 L 72.18 -18.61 L 72.18 -20.56 L 72.40 -20.78 L 72.40 -28.35 L 72.18 -28.57 L 72.18 -30.95 L 71.97 -31.17 L 71.75 -33.98 L 71.53 -34.20 L 71.53 -35.28 L 71.32 -35.50 L 70.88 -38.53 L 70.45 -39.61 L 70.45 -40.47 L 70.02 -41.34 L 70.02 -41.99 L 69.59 -42.85 L 69.59 -43.50 L 69.16 -44.37 L 69.16 -45.02 L 68.72 -46.32 L 68.29 -46.97 L 67.86 -48.70 L 66.34 -51.95 L 66.34 -52.38 L 64.18 -56.49 L 64.18 -56.92 L 63.74 -57.36 L 62.88 -59.31 L 62.44 -59.74 L 60.93 -62.55 L 56.60 -68.83 L 52.27 -74.02 L 45.99 -80.30 L 42.10 -83.55 L 35.39 -88.31 L 34.74 -88.53 L 32.14 -90.26 L 31.06 -90.69 L 30.63 -91.12 L 25.00 -93.94 L 24.57 -93.94 L 23.48 -94.59 L 23.05 -94.59 L 21.97 -95.24 L 20.88 -95.45 L 19.16 -96.32 L 15.91 -97.40 L 15.26 -97.40 L 14.39 -97.83 L 12.88 -98.05 L 12.01 -98.48 L 11.37 -98.48 L 10.28 -98.91 L 9.42 -98.91 L 8.33 -99.35 L 4.65 -99.78 Z M 4.44 -100.00"/></symbol></svg>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="NPF.house — start">
+      <svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>
+      <span>NPF<span style="font-weight:300;color:var(--muted)">.house</span></span>
+    </a>
+    <nav aria-label="Divisions">
+      <a href="#lab">LAB <span>/ Research</span></a>
+      <a href="#divisions">ADD <span>/ Design</span></a>
+      <a href="#divisions">WTF <span>/ Workshop</span></a>
+      <a href="#osv">OSV <span>/ Contact</span></a>
     </nav>
+  </div>
+</header>
 
-    <section id="home">
-        <div class="container">
-            <h1>New Physical Forms</h1>
-            <p style="margin-bottom: 40px;">NPF is a systematic framework for creative exploration operating across five interdependent divisions. Each division addresses a distinct aspect of spatial and material practice while maintaining dialogue with the whole.</p>
-            
-            <div class="division-links">
-                <a href="#wtf" class="division-link"><strong>WTF</strong> — Workshop for Temporary Forms</a>
-                <a href="#add" class="division-link"><strong>ADD</strong> — Applied Design Division</a>
-                <a href="#lab" class="division-link"><strong>LAB</strong> — Laboratory</a>
-                <a href="#brb" class="division-link"><strong>BRB</strong> — Build · Research · Build</a>
-                <a href="#osv" class="division-link"><strong>OSV</strong> — Open System View</a>
-            </div>
+<main id="top">
+  <section class="wrap hero">
+    <div class="grid">
+      <h1>New Physical Forms<em>.</em></h1>
+      <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="The Slurp, NPF symbol"><use href="#slurp"/></svg>
+      <div class="meta">
+        <p class="lede">A house for research, design and fabrication. Form is studied, drawn and built under one roof, in our own workshop in Stockholm.</p>
+        <div><div class="label">Practice</div>Research / Design / Fabrication</div>
+        <div><div class="label">Method</div>BRB — Build, Research, Build</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="divisions">
+    <div class="sec-head">
+      <h2>One identity.<br>Four functions.</h2>
+      <span class="label">NPF / Architecture</span>
+    </div>
+    <div class="divs">
+      <a class="div" href="#lab">
+        <span class="label">Research</span>
+        <span class="code">LAB</span>
+        <span class="name">NPF / LAB</span>
+        <p>Experiments in material, motion and form. Where questions are built before they are answered.</p>
+        <span class="go">→ L000 Big Slurp</span>
+      </a>
+      <a class="div" href="#index">
+        <span class="label">Design</span>
+        <span class="code">ADD</span>
+        <span class="name">Applied Design Division</span>
+        <p>Products, furniture, interiors and applied concepts. Research turned into objects people use.</p>
+        <span class="go">→ Index</span>
+      </a>
+      <a class="div" href="#index">
+        <span class="label">Workshop</span>
+        <span class="code">WTF</span>
+        <span class="name">Workshop for Temporary Forms</span>
+        <p>Fabrication, set design, special builds and temporary installations. 440 m² of workshop on site.</p>
+        <span class="go">→ Index</span>
+      </a>
+      <a class="div" href="#osv">
+        <span class="label">Contact</span>
+        <span class="code">OSV</span>
+        <span class="name">Operational System View</span>
+        <p>Project overview, contact and the way into the practice. Start here with a brief or a question.</p>
+        <span class="go">→ Contact</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="l000 sec" id="lab">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">NPF / LAB — Continuous work</span>
+        <span class="label status"><i></i> The source — no end</span>
+      </div>
+      <div class="grid">
+        <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="Big Slurp, turning"><g class="spin"><use href="#slurp"/></g></svg>
+        <div class="txt">
+          <span class="label">L000</span>
+          <h2>Big Slurp</h2>
+          <p class="sub">A never-ending well of curiosity.</p>
+          <div class="myth">
+            <p>Before the workshop, before the first drawing, there was a pull.</p>
+            <p>Something turned inward and opened at the same moment. It has not stopped turning.</p>
+            <p>Every form made here is drawn up from it. Every form goes back.</p>
+            <p>The well is not explained. It is visited.</p>
+          </div>
+          <p class="verse">Life is the wine you drink.<br>The cup refills from its own Slurp.</p>
+          <div class="facts">
+            <div><span class="label">Opened</span><b>Before L001</b></div>
+            <div><span class="label">Depth</span><b>Unmeasured</b></div>
+            <div><span class="label">State</span><b>Turning</b></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="wtf">
-        <div class="container">
-            <h2>01 — WTF</h2>
-            <h3>Workshop for Temporary Forms</h3>
-            <p>Set design, window displays, events, and temporary spatial interventions. WTF explores the ephemeral nature of built environments, creating installations that exist within defined temporal boundaries.</p>
-            
-            <div class="grid">
-                <div class="card">
-                    <div class="card-image">
-                        <!-- REPLACE WITH IMAGE: <img src="/images/wtf/2026/001.jpg" alt="WTF 2026 001"> -->
-                        <!-- OR VIDEO: <video autoplay muted loop playsinline><source src="/videos/wtf/2026/001.mp4" type="video/mp4"></video> -->
-                        <div class="img-placeholder">WTF—2026—001</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-number">WTF—2026—001</div>
-                        <p>Project title and brief description</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <!-- REPLACE WITH IMAGE: <img src="/images/wtf/2026/002.jpg" alt="WTF 2026 002"> -->
-                        <!-- OR VIDEO: <video autoplay muted loop playsinline><source src="/videos/wtf/2026/002.mp4" type="video/mp4"></video> -->
-                        <div class="img-placeholder">WTF—2026—002</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-number">WTF—2026—002</div>
-                        <p>Project title and brief description</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="wrap sec border" id="borderlands">
+    <div class="sec-head"><span class="label">Practice / Borderlands</span><span class="label">Text — Joel Junsjö</span></div>
+    <div class="grid">
+      <h2>Work at the edge of what a form can hold.</h2>
+      <div class="cols">
+        <p>My work sits in the borderlands between art, science and building. I make physical forms to think with, about existence, consciousness and evolution.</p>
+        <p>For many years I have built worlds for others: sets, rooms, special builds, surfaces that look like something they are not. That craft taught me how material behaves and how people read space. NPF turns that knowledge toward my own questions.</p>
+        <p>The questions are old. How does something come to exist rather than nothing? How does matter become aware of itself? How do patterns repeat, branch and change over time? I do not answer them in words. I build models: vortices, tori, spines and rings that copy the structures nature keeps returning to, and I study what happens when they move, catch light, or fail.</p>
+        <p>This is research in the maker's sense. The workshop is the laboratory, and the object is the argument.</p>
+      </div>
+      <div class="axes">
+        <div><span class="label">Axis 01</span><h3>Existence</h3><p>Why form appears at all. The vortex as the simplest shape that holds itself together while moving.</p></div>
+        <div><span class="label">Axis 02</span><h3>Consciousness</h3><p>Inside and outside of the same surface. The torus as a model of a system that folds back on itself.</p></div>
+        <div><span class="label">Axis 03</span><h3>Evolution</h3><p>Repetition, branching and drift. Forms that grow by copying themselves with small errors.</p></div>
+      </div>
+    </div>
+  </section>
 
-    <section id="add">
-        <div class="container">
-            <h2>02 — ADD</h2>
-            <h3>Applied Design Division</h3>
-            <p>Collectibles, numbered and limited edition furniture, garments, and art objects. Each piece is systematically catalogued and produced in controlled quantities.</p>
-            
-            <div class="grid">
-                <div class="card">
-                    <div class="card-image">
-                        <!-- REPLACE: /images/add/A001.jpg -->
-                        <div class="img-placeholder">ADD—A001</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-number">ADD—A001</div>
-                        <p>Anodized aluminum composition, limited edition</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-image">
-                        <!-- REPLACE: /images/add/A002.jpg -->
-                        <div class="img-placeholder">ADD—A002</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-number">ADD—A002</div>
-                        <p>Anodized aluminum composition, limited edition</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="brb sec" id="method">
+    <div class="wrap">
+      <div class="sec-head"><h2>BRB</h2><span class="label">Method — not a division</span></div>
+      <div class="steps">
+        <div class="step"><span class="label">Step 1</span><h3>Build</h3><p>Start with the object. A rough model reveals more than a finished sketch.</p></div>
+        <div class="step"><span class="label">Step 2</span><h3>Research</h3><p>Measure, read and test what the model shows. Bring in maths, nature and other disciplines.</p></div>
+        <div class="step"><span class="label">Step 3</span><h3>Build</h3><p>Build again with what was learned. Every finished piece is the start of the next question.</p></div>
+      </div>
+    </div>
+  </section>
 
-    <section id="lab">
-        <div class="container">
-            <h2>03 — LAB</h2>
-            <h3>Laboratory</h3>
-            <p>A research and exploration division investigating material properties, spatial conditions, and form generation.</p>
-            
-            <div class="project">
-                <div class="project-title">BIG SLURP</div>
-                <div class="project-status">Ongoing investigation · Proposed installation</div>
-                <p style="margin-bottom: 30px;">BIG SLURP explores continuous inversion as a spatial condition. A textile body of constant length is turned through itself by a distributed system, producing a persistent loop without origin or resolution. The project treats inversion not as an event, but as a sustained state in which inside and outside remain temporary and reversible.</p>
-                <!-- OPTIONAL VIDEO: <video width="100%" controls style="max-width: 800px;"><source src="/videos/lab/big-slurp.mp4" type="video/mp4"></video> -->
-            </div>
-            
-            <div class="project">
-                <div class="project-title">Anodized Aluminum Surface Study</div>
-                <div class="project-status">Material research · Ongoing</div>
-                <p style="margin-bottom: 30px;">Investigation of microscopic photographs of anodized aluminum surfaces, revealing a hidden chromatic landscape. What appears macroscopically as uniform gray resolves at the microscale into complex patterns of colorful crystalline structures. This research examines the gap between perceived and actual material properties, questioning assumptions about surface and color at different scales of observation.</p>
-                <!-- OPTIONAL VIDEO: <video width="100%" controls style="max-width: 800px;"><source src="/videos/lab/aluminum-study.mp4" type="video/mp4"></video> -->
-            </div>
-        </div>
-    </section>
+  <section class="wrap sec" id="index">
+    <div class="sec-head"><h2>Index</h2><span class="label">Selected entries</span></div>
+    <div class="idx-wrap">
+      <table class="idx">
+        <thead><tr><th>No.</th><th>Project</th><th>Division</th><th>Type</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="c">L000</td><td class="t">Big Slurp</td><td class="c">LAB</td><td>The source</td><td><span class="tag live">Continuous</span></td></tr>
+          <tr><td class="c">ADD002</td><td class="t">Pure Optical Emergence</td><td class="c">ADD</td><td>Light sculpture, etched glass</td><td><span class="tag">In development</span></td></tr>
+          <tr><td class="c">WTF—</td><td class="t">Commissioned builds</td><td class="c">WTF</td><td>Set design, windows, installations</td><td><span class="tag">Archive in progress</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-    <section id="brb">
-        <div class="container">
-            <h2>04 — BRB</h2>
-            <h3>Build · Research · Build</h3>
-            <p>Our working philosophy. A continuous loop where making informs inquiry and inquiry informs making. Knowledge emerges through iterative physical practice rather than preceding it.</p>
-            
-            <div class="loop-diagram">
-                <div class="loop-text">BUILD → RESEARCH → BUILD</div>
-            </div>
-        </div>
-    </section>
+  <section class="wrap sec rule" id="identity">
+    <div class="sec-head"><h2>The mark</h2><span class="label">Identity / Logo set</span></div>
+    <div class="marks">
+      <div class="tile"><div class="face"><svg class="sw" viewBox="-102 -102 204 204"  aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">01 Symbol — positive</span></div>
+      <div class="tile"><div class="face inv"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">02 Symbol — negative</span></div>
+      <div class="tile"><div class="face or"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">03 Symbol — on orange</span></div>
+      <div class="tile"><div class="face"><svg class="sw line" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg></div><span class="label">04 Symbol — line, for etching and laser</span></div>
+      <div class="tile"><div class="face"><span class="word">NPF</span></div><span class="label">05 Wordmark</span></div>
+      <div class="tile"><div class="face inv"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>NPF</span></div><span class="label">06 Lockup — primary</span></div>
+      <div class="tile"><div class="face"><span class="lock"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg>NPF<span class="sl">/</span>LAB</span></div><span class="label">07 Division lockup</span></div>
+      <div class="tile"><div class="face"><span class="stack"><svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp"/></svg><span>NPF</span><small>New Physical Forms</small></span></div><span class="label">08 Stacked lockup</span></div>
+    </div>
+    <div class="rules">
+      <div><b>Use the original</b>The swirl is always placed from the master file. Never redrawn, stretched, mirrored or rotated to a new resting angle.</div>
+      <div><b>Divisions follow the slash</b>NPF / LAB, NPF / ADD, NPF / WTF, NPF / OSV. Same weight, same size. No separate logos.</div>
+      <div><b>Colour</b>Ink on paper, paper on ink, or ink on orange. Orange is a ground for the mark, never the mark on grey.</div>
+    </div>
+  </section>
 
-    <section id="osv">
-        <div class="container">
-            <h2>05 — OSV</h2>
-            <h3>Open System View</h3>
-            
-            <div class="contact-grid">
-                <div class="contact-section">
-                    <h3>Contact</h3>
-                    <p>
-                        Email: info@npf.studio<br>
-                        Phone: +46 XX XXX XX XX
-                    </p>
-                </div>
-                
-                <div class="contact-section">
-                    <h3>Location</h3>
-                    <p>
-                        Stockholm, Sweden
-                    </p>
-                </div>
-                
-                <div class="contact-section">
-                    <h3>Collaborators</h3>
-                    <p>
-                        Available upon request
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="osv sec" id="osv">
+    <div class="wrap grid">
+      <h2>OSV<br>Start here.</h2>
+      <div class="ct">
+        <span class="label">Projects, commissions, collaborations</span>
+        <span class="mail" id="mail">studio@npf.house</span>
+        <button class="copy" id="copybtn" type="button">Copy address</button>
+        <div><span class="label">Workshop</span><br>Mejerivägen 4<br>117 61 Stockholm, Sweden</div>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <script>
-        // Smooth scrolling and active nav highlighting
-        const navLinks = document.querySelectorAll('nav a[data-section]');
-        const sections = document.querySelectorAll('section');
-        
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Active section highlighting on scroll
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-section') === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+<footer class="wrap">
+  <span class="label">NPF.house — New Physical Forms</span>
+  <span class="label">Research / Design / Fabrication — Stockholm</span>
+</footer>
+
+<script>
+(function(){
+  const b=document.getElementById("copybtn"), m=document.getElementById("mail");
+  b.addEventListener("click",()=>{
+    const done=()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy address",1600)};
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(m);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected — press copy"};
+    try{navigator.clipboard.writeText(m.textContent).then(done,sel)}catch(e){sel()}
+  });
+})();
+</script>
 </body>
 </html>
