@@ -133,6 +133,17 @@ nav a:hover{color:var(--orange-ink)}
 .dl{grid-column:1/13;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--ink);padding-top:16px}
 .dl a{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-decoration:none;border:1px solid var(--ink);padding:8px 12px}
 .dl a:hover{background:var(--ink);color:var(--paper)}
+.lab-cta{grid-column:1/13;margin-top:8px;background:var(--ink);color:var(--paper);display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px,3vw,48px);align-items:center;padding:clamp(28px,4vw,52px)}
+.lab-cta .l{display:flex;flex-direction:column;gap:14px;min-width:0}
+.lab-cta .over{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.lab-cta h3{font-size:clamp(30px,4vw,56px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--paper)}
+.lab-cta p{font-size:clamp(15px,1.3vw,18px);line-height:1.45;max-width:38ch;color:color-mix(in srgb,var(--paper) 78%,transparent)}
+.lab-cta .aph{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--paper) 55%,transparent)}
+.lab-cta .r{display:flex;justify-content:flex-end;min-width:0}
+.lab-cta .btn{display:inline-flex;align-items:center;gap:12px;background:var(--orange);color:#0D0D0C;text-decoration:none;font-family:var(--mono);font-size:clamp(14px,1.3vw,17px);font-weight:500;letter-spacing:.02em;padding:18px 26px;border:2px solid var(--orange);transition:background .2s,color .2s}
+.lab-cta .btn .ar{font-size:1.2em;line-height:1}
+.lab-cta .btn:hover{background:transparent;color:var(--orange)}
+@media (max-width:760px){.lab-cta{grid-template-columns:1fr;gap:20px}.lab-cta .r{justify-content:flex-start}.lab-cta .btn{width:100%;justify-content:center}}
 
 /* OSV */
 .osv{border-top:1px solid var(--ink)}
@@ -277,7 +288,17 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
       <figure class="fig f-c"><div class="pane"><img src="assets/lab001/C_generations.svg" alt="Five generations of open tori, each emerging from the throat of the one before" loading="lazy" width="625" height="897"></div><figcaption><b>Big Spit</b>Every generation shoots out of the last one's throat, turning the other way.</figcaption></figure>
       <figure class="fig f-d"><div class="pane"><img src="assets/lab001/D_grid.svg" alt="Grid of nine open tori: torsion increases down the rows, ridges across the columns" loading="lazy" width="626" height="573"></div><figcaption><b>Torus grid</b>Torsion 0 → 1 down the rows. Ridges 0 → 6 → 12 across. One surface, nine temperaments.</figcaption></figure>
       <figure class="fig f-b"><div class="pane"><img src="assets/lab001/B_ridges.svg" alt="Open torus with nine ridges running around its axis" loading="lazy" width="856" height="807"></div><figcaption><b>Ridges</b>Nine ridges run around the axis. The surface folds and still closes on itself.</figcaption></figure>
-      <div class="dl"><span class="label">Never still. Never fully in balance. Never fully out of it.</span><a href="assets/lab001/slurp-lab-vector.html" target="_blank" rel="noopener">Slurp Lab Vector — run live →</a></div>
+      <div class="lab-cta">
+        <div class="l">
+          <span class="over">Interactive — NPF / Slurp Lab</span>
+          <h3>Run the Slurp live.</h3>
+          <p>The open torus as pure vector: three axes, every parameter a slider, the surface playing itself as sound. Spit it out, slurp it back.</p>
+          <span class="aph">Never still. Never fully in balance. Never fully out of it.</span>
+        </div>
+        <div class="r">
+          <a class="btn" href="assets/lab001/slurp-lab-vector.html" target="_blank" rel="noopener">Slurp Lab Vector <span class="ar">→</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
