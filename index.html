@@ -140,9 +140,10 @@ nav a:hover{color:var(--orange-ink)}
 .lab-cta p{font-size:clamp(15px,1.3vw,18px);line-height:1.45;max-width:38ch;color:color-mix(in srgb,var(--paper) 78%,transparent)}
 .lab-cta .aph{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--paper) 55%,transparent)}
 .lab-cta .r{display:flex;justify-content:flex-end;min-width:0}
-.lab-cta .btn{display:inline-flex;align-items:center;gap:12px;background:var(--orange);color:#0D0D0C;text-decoration:none;font-family:var(--mono);font-size:clamp(14px,1.3vw,17px);font-weight:500;letter-spacing:.02em;padding:18px 26px;border:2px solid var(--orange);transition:background .2s,color .2s}
-.lab-cta .btn .ar{font-size:1.2em;line-height:1}
-.lab-cta .btn:hover{background:transparent;color:var(--orange)}
+.lab-cta .btn{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#0D0D0C;text-decoration:none;font-family:var(--sans);font-size:clamp(15px,1.3vw,18px);font-weight:600;letter-spacing:-.01em;padding:15px 28px;border:2px solid var(--orange);border-radius:999px;transition:background .18s,color .18s,transform .18s,box-shadow .18s;box-shadow:0 1px 0 rgba(13,13,12,.06)}
+.lab-cta .btn .ar{font-size:1.15em;line-height:1;transition:transform .18s}
+.lab-cta .btn:hover{background:var(--orange-ink);border-color:var(--orange-ink);color:#fff;transform:translateY(-1px);box-shadow:0 6px 18px rgba(194,65,12,.28)}
+.lab-cta .btn:hover .ar{transform:translateX(3px)}
 @media (max-width:760px){.lab-cta{grid-template-columns:1fr;gap:20px}.lab-cta .r{justify-content:flex-start}.lab-cta .btn{width:100%;justify-content:center}}
 
 /* OSV */
@@ -292,7 +293,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
         <div class="l">
           <span class="over">Interactive — NPF / Slurp Lab</span>
           <h3>Run the Slurp live.</h3>
-          <p>The open torus as pure vector: three axes, every parameter a slider, the surface playing itself as sound. Spit it out, slurp it back.</p>
+          <p>The open torus as pure vector: choose the number of axes, every parameter a slider, the surface playing itself as sound — Spit it out &amp; slurp it back.</p>
           <span class="aph">Never still. Never fully in balance. Never fully out of it.</span>
         </div>
         <div class="r">
