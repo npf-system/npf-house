@@ -366,6 +366,12 @@ nav a b{font-weight:500!important}
 .gen figcaption{display:flex;flex-direction:column;gap:4px;font-size:var(--small);color:var(--muted)}
 .gen figcaption b{color:var(--ink);font-family:var(--mono);font-weight:500;font-size:var(--sys);letter-spacing:.1em;text-transform:uppercase}
 @media (max-width:620px){.gens{grid-template-columns:minmax(0,1fr)}}
+
+/* Borderlands — interests within the framework (replaces the three axes) */
+.interests{grid-column:1/13;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g);row-gap:10px;border-top:1px solid var(--hair);padding-top:18px;margin-top:clamp(20px,3vw,40px)}
+.interests .label{grid-column:1/7}
+.interests p{grid-column:7/13;font-size:var(--lead);line-height:1.35;letter-spacing:-.01em;max-width:52ch}
+@media (max-width:760px){.interests .label,.interests p{grid-column:1/13}}
 </style>
 </head>
 <body>
@@ -497,10 +503,9 @@ nav a b{font-weight:500!important}
         <p>This is not illustration. Every piece is built, measured and run: flow, rotation, light, failure. What holds, stays. What fails becomes the next question.</p>
         <p>The workshop is the laboratory. The object is the argument.</p>
       </div>
-      <div class="axes">
-        <div><span class="label">Axis 01</span><h3>Physics</h3><p>Forces, flow and rotation. The material decides.</p></div>
-        <div><span class="label">Axis 02</span><h3>Nature</h3><p>The patterns nature keeps returning to: vortex, torus, spiral.</p></div>
-        <div><span class="label">Axis 03</span><h3>Consciousness</h3><p>The same figure, turned inward. Awareness that feeds on its own turning.</p></div>
+      <div class="interests">
+        <span class="label">Within the framework</span>
+        <p>Three things hold my attention. Physics: forces, flow and rotation, and how the material decides. Nature: the figures it keeps returning to, the vortex, the torus, the spiral. Consciousness: whether the form that feeds on itself describes the mind as much as the matter.</p>
       </div>
     </div>
   </section>
