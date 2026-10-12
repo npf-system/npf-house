@@ -7,22 +7,18 @@
 <title>NPF.house</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@300;500&display=swap">
 <style>
 /* Layout: strict 12-column Swiss grid, hairline rules, one orange accent, the Slurp as the only image-like object */
 :root{
-  --paper:#BFBEB9; --paper-2:#B2B1AC; --ink:#1A1A18; --muted:#5E5C58; --stage:#9A9994;
-  --line:rgba(26,26,24,.22); --orange:#FF6B35; --orange-ink:#C2410C;
+  --paper:#DAD3CB; --paper-2:#E2DCD4; --bone:#EBE6E0; --taupe:#A59C8E; --ink:#28251F; --void:#0B0A08;
+  --muted:#5C564D; --stage:#EBE6E0; --hair:#3A362F;
+  --line:rgba(40,37,31,.26); --orange:#D6884A; --orange-ink:#8A4A1A;
   --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   --g:clamp(16px,3vw,40px);
+  color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#1A1A18; --paper-2:#242422; --ink:#BFBEB9; --muted:#8A8985; --stage:#2E2E2C;
-  --line:rgba(191,190,185,.2); --orange-ink:#FF8A5C; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#1A1A18; --paper-2:#242422; --ink:#BFBEB9; --muted:#8A8985; --stage:#2E2E2C;
-  --line:rgba(191,190,185,.2); --orange-ink:#FF8A5C; color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -185,6 +181,191 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 @media (prefers-reduced-motion:reduce){.spin{animation:none!important}.status i{animation:none}}
 .spin{transform-box:fill-box;transform-origin:center;animation:rot 60s linear infinite}
 @keyframes rot{to{transform:rotate(360deg)}}
+
+/* ===== PALETTE DRAFT — bone / greige / taupe / orange / ink =====
+   Rule: every object that is NOT a black surface carries a 1px ink hairline.
+   Black surfaces (ink blocks, LAB_001, CTA) are pure fill — no line. */
+body{background:var(--paper)}
+a:focus-visible,button:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+
+/* stripe — the thick bar + hairline band from the board */
+.stripe{height:30px;background:
+  linear-gradient(var(--void),var(--void)) 0 0/100% 9px no-repeat,
+  linear-gradient(var(--hair),var(--hair)) 0 20px/100% 1px no-repeat,
+  linear-gradient(var(--bone),var(--bone)) 0 21px/100% 7px no-repeat,
+  linear-gradient(var(--hair),var(--hair)) 0 28px/100% 1px no-repeat}
+header{border-bottom:0;background:var(--paper)}
+header::after{content:"";display:block;height:30px;background:inherit;background:
+  linear-gradient(var(--void),var(--void)) 0 0/100% 9px no-repeat,
+  linear-gradient(var(--hair),var(--hair)) 0 19px/100% 1px no-repeat,
+  linear-gradient(var(--bone),var(--bone)) 0 20px/100% 7px no-repeat,
+  linear-gradient(var(--hair),var(--hair)) 0 27px/100% 1px no-repeat,
+  var(--paper)}
+nav a:hover{color:var(--orange-ink)}
+
+/* the dot — an object, not a glyph */
+.pt{display:inline-block;width:.17em;height:.17em;border-radius:50%;background:var(--orange);
+  box-shadow:0 0 0 1px var(--hair);margin-left:.05em;vertical-align:baseline}
+.dot,.status i{background:var(--orange);box-shadow:0 0 0 1px var(--hair)}
+.l000 .status i{box-shadow:none}
+
+/* hero mark in a bone disc */
+.hero .disc{grid-column:8/13;align-self:end;justify-self:end;width:clamp(180px,30vw,440px);aspect-ratio:1;
+  border-radius:50%;background:var(--bone);border:1px solid var(--hair);display:grid;place-items:center;margin-bottom:.4em}
+.hero .disc .mark{grid-column:auto;align-self:center;justify-self:center;width:64%;height:auto;max-width:none;aspect-ratio:1;margin:0;color:var(--ink);font-size:16px}
+.hero .meta{border-top:1px solid var(--hair)}
+
+/* divisions — angular system face for the codes, a colour disc per division */
+.divs{border-top:9px solid var(--void)}
+.div .code,.osv h2:first-child,.brb .sec-head h2{font-family:var(--mono);font-weight:800;letter-spacing:-.045em;text-transform:uppercase}
+.div .code{font-size:clamp(52px,6.4vw,104px);line-height:.9}
+.div:hover .code{color:var(--orange-ink)}
+.div .label{display:flex;align-items:center;gap:10px}
+.div .label::before{content:"";width:14px;height:14px;border-radius:50%;flex:none;border:1px solid var(--hair)}
+.div:nth-child(1) .label::before{background:var(--bone)}
+.div:nth-child(2) .label::before{background:var(--taupe)}
+.div:nth-child(3) .label::before{background:var(--orange)}
+.div:nth-child(4) .label::before{background:var(--ink);border-color:var(--ink)}
+.div{border-right-color:var(--line)}
+
+/* tags & buttons — bone fill + hairline; hover goes to ink (black = no line) */
+.tag{border:1px solid var(--hair);background:var(--bone);color:var(--ink)}
+.tag.live{background:var(--orange);border-color:var(--hair);color:var(--ink)}
+.copy,.dl a{background:var(--bone);border:1px solid var(--hair);color:var(--ink);border-radius:0}
+.copy:hover,.dl a:hover{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+
+/* LAB_001 — ink surface, pure fill */
+.l000{background:var(--ink);color:var(--bone)}
+.l000 .mark{color:var(--bone)}
+.l000 .label{color:color-mix(in srgb,var(--bone) 60%,transparent)}
+.l000 .myth{color:color-mix(in srgb,var(--bone) 74%,transparent)}
+.l000 .myth p:nth-child(2),.l000 h2{color:var(--bone)}
+.facts{border-top-color:color-mix(in srgb,var(--bone) 28%,transparent)}
+
+/* studies — figures on bone panes with hairline */
+.fig .pane{background:var(--bone);border:1px solid var(--hair)}
+.dl{border-top:1px solid var(--hair)}
+.lab-cta{background:var(--ink)}
+.lab-cta .run .rdot{box-shadow:0 0 0 1px var(--hair)}
+
+/* borderlands */
+.axes{border-top:1px solid var(--hair)}
+
+/* BRB — bone band framed by hairlines, orange headline carries the line too */
+.brb{background:var(--bone);border-block:1px solid var(--hair)}
+.brb .step{border-top:1px solid var(--hair)}
+.brb .step:nth-child(2) h3{color:var(--orange);-webkit-text-stroke:1px var(--hair);paint-order:stroke fill}
+
+/* index */
+.idx th{border-bottom:1px solid var(--hair)}
+.idx td.c{font-weight:700}
+.idx tr td.c:first-child::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;
+  margin-right:10px;border:1px solid var(--hair);vertical-align:.05em}
+.idx tbody tr:nth-child(1) td.c:first-child::before{background:var(--bone)}
+.idx tbody tr:nth-child(2) td.c:first-child::before{background:var(--taupe)}
+.idx tbody tr:nth-child(3) td.c:first-child::before{background:var(--orange)}
+
+/* OSV */
+.osv{border-top:9px solid var(--void)}
+.osv h2:first-child{font-size:clamp(52px,8vw,128px)}
+
+/* footer bookends the header stripe */
+footer{border-top:0;position:relative;padding-top:54px}
+footer::before{content:"";position:absolute;left:var(--g);right:var(--g);top:0;height:30px;background:
+  linear-gradient(var(--hair),var(--hair)) 0 0/100% 1px no-repeat,
+  linear-gradient(var(--bone),var(--bone)) 0 1px/100% 7px no-repeat,
+  linear-gradient(var(--hair),var(--hair)) 0 8px/100% 1px no-repeat,
+  linear-gradient(var(--void),var(--void)) 0 19px/100% 9px no-repeat}
+
+@media (max-width:1000px){
+  .hero .disc{grid-column:1/13;justify-self:start;width:220px;margin:24px 0 0}
+}
+
+/* ================= TYPE SYSTEM — draft 2 =================
+   Two families, five weights, one rule:
+   WORDS are Inter. CODES (LAB, ADD, WTF, OSV, BRB, LAB_001 …) are JetBrains Mono 800.
+   Small system text (labels, nav, links, tags, buttons, table heads) is ONE style: Mono 500 caps.
+   Orange is never text. */
+:root{
+  --d1:clamp(56px,10.5vw,168px);   /* hero, Big Slurp */
+  --d2:clamp(40px,6vw,96px);       /* section titles */
+  --d3:clamp(28px,3.4vw,52px);     /* axes, steps, CTA */
+  --lead:clamp(19px,1.8vw,24px);
+  --body:17px; --small:15px; --sys:11.5px;
+  --tr-d:-.045em; --tr-c:-.03em;
+}
+body{font-size:var(--body)}
+/* display — Inter 900, one tracking, one line-height */
+h1,h2,h3,.hero h1,.sec-head h2,.l000 h2,.border h2,.osv h2,.axes h3,.brb .step h3,.lab-cta h3{
+  font-family:var(--sans);font-weight:900;letter-spacing:var(--tr-d);line-height:.92;text-transform:none}
+.hero h1,.l000 h2{font-size:var(--d1)}
+.sec-head h2,.border h2,.osv h2{font-size:var(--d2)}
+.axes h3,.brb .step h3,.lab-cta h3{font-size:var(--d3)}
+/* codes — Mono 800 caps, at any size */
+.cd,.div .code,.osv h2.cd,.brb .sec-head h2.cd,.idx td.c,nav a b{
+  font-family:var(--mono)!important;font-weight:800!important;letter-spacing:var(--tr-c)!important;text-transform:uppercase}
+.div .code{font-size:var(--d2);line-height:.9}
+.osv h2.cd{font-size:var(--d1)}
+.idx td.c{font-size:14px;letter-spacing:0!important}
+/* lead — Inter 400, never light */
+.hero .meta .lede,.l000 .sub,.l000 .verse,.osv-sub,.border .cols p:first-child{
+  font-size:var(--lead);font-weight:400;line-height:1.35;letter-spacing:-.01em}
+.l000 .myth{font-size:var(--body)}
+/* emphasis — Inter 600 only */
+.div .name,.facts b,.idx td.t,.osv .ct .mail{font-weight:600}
+.idx td.t{font-size:var(--lead);letter-spacing:-.015em}
+.div p,.axes p,.brb .step p,.fig figcaption,.lab-cta p{font-size:var(--small)}
+/* system — Mono 500 caps, one size, one tracking */
+.label,nav a,.div .go,.tag,.copy,.dl a,.idx th,.fig figcaption b,.lab-cta .over,.lab-cta .aph,.lab-cta .run{
+  font-family:var(--mono);font-weight:500;font-size:var(--sys);letter-spacing:.1em;text-transform:uppercase}
+nav a span{color:var(--muted)}
+.lab-cta .over{color:color-mix(in srgb,var(--bone) 66%,transparent)}
+.lab-cta .run{font-size:13px}
+.copy,.dl a{padding:9px 14px}
+.tag{padding:3px 9px}
+/* brand lockup */
+.brand{font-weight:900;letter-spacing:var(--tr-d)}
+.brand .dom{font-weight:400;color:var(--muted);letter-spacing:-.01em}
+/* orange never text: BRB step 2 gets an orange band instead */
+.brb .step:nth-child(2) h3{color:var(--ink);-webkit-text-stroke:0}
+.brb .step:nth-child(2){border-top:0;padding-top:0}
+.brb .step:nth-child(2)::before{content:"";display:block;height:9px;background:var(--orange);
+  box-shadow:0 0 0 1px var(--hair);margin-bottom:14px}
+.div:hover .code{color:var(--ink);text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.08em}
+/* muted readable on dark */
+.l000 .label{color:color-mix(in srgb,var(--bone) 66%,transparent)}
+.l000 .myth{color:color-mix(in srgb,var(--bone) 78%,transparent)}
+
+/* ================= DRAFT 3 — one heavy voice =================
+   MASS  = Inter 900. Only Inter is ever heavy.
+   LINE  = JetBrains Mono, light at display size, 500 at system size. Mono is never bold.
+   The type mirrors the board: the black bar is Inter 900, the hairline is Mono light. */
+:root{--code-w:300;--tr-c:-.02em}
+.cd,.div .code,.osv h2.cd,.brb .sec-head h2.cd{
+  font-family:var(--mono)!important;font-weight:var(--code-w)!important;letter-spacing:var(--tr-c)!important;
+  line-height:.95!important;text-transform:uppercase}
+.idx td.c,nav a b{font-family:var(--mono)!important;font-weight:500!important;letter-spacing:.1em!important;color:var(--ink)}
+.idx td.c{font-size:var(--sys)}
+nav a b{font-weight:500!important}
+.div .code{font-size:var(--d2)}
+.osv h2.cd{font-size:var(--d1)}
+.brb .sec-head h2.cd{font-size:var(--d2)}
+.div:hover .code{text-decoration-thickness:1px;text-underline-offset:.1em}
+/* BRB: the orange band sits ON the hairline, so all three headings align */
+.brb .step:nth-child(2){border-top:1px solid var(--hair);padding-top:14px;position:relative}
+.brb .step:nth-child(2)::before{position:absolute;left:0;right:0;top:-5px;height:9px;margin:0}
+/* codes sit on a hairline: the code is a label for a thing, so it gets the same rule as objects */
+
+/* LAB_002 — Slurp_Generator: four equal square tiles. Dark tiles are black surfaces (no line), grey tiles get the hairline (R10) */
+.gens{grid-column:1/13;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--g)}
+.gen{margin:0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.gen .tile{aspect-ratio:1;overflow:hidden;background:#121212}
+.gen-lt .tile{background:#8C8B85;border:1px solid var(--hair)}
+.gen video{display:block;width:100%;height:100%;object-fit:cover}
+.gen-lt video{mix-blend-mode:normal}
+.gen figcaption{display:flex;flex-direction:column;gap:4px;font-size:var(--small);color:var(--muted)}
+.gen figcaption b{color:var(--ink);font-family:var(--mono);font-weight:500;font-size:var(--sys);letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:620px){.gens{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -194,13 +375,13 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="NPF.house — start">
       <svg class="sw" viewBox="-102 -102 204 204" aria-hidden="true"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>
-      <span>NPF<span style="font-weight:300;color:var(--muted)">.house</span></span>
+      <span>NPF<span class="dom">.house</span></span>
     </a>
     <nav aria-label="Divisions">
-      <a href="#lab">LAB <span>/ Research</span></a>
-      <a href="#divisions">ADD <span>/ Opening soon</span></a>
-      <a href="#divisions">WTF <span>/ Workshop</span></a>
-      <a href="#osv">OSV <span>/ Operational System View</span></a>
+      <a href="#lab"><b>LAB</b> <span>/ Research</span></a>
+      <a href="#divisions"><b>ADD</b> <span>/ Opening soon</span></a>
+      <a href="#divisions"><b>WTF</b> <span>/ Workshop</span></a>
+      <a href="#osv"><b>OSV</b> <span>/ Operational System View</span></a>
     </nav>
   </div>
 </header>
@@ -208,10 +389,10 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 <main id="top">
   <section class="wrap hero">
     <div class="grid">
-      <h1>New Physical Forms<em>.</em></h1>
-      <svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="The Slurp, NPF symbol"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg>
+      <h1>New Physical Forms<em class="pt" aria-hidden="true"></em></h1>
+      <div class="disc"><svg class="mark sw" viewBox="-102 -102 204 204" role="img" aria-label="The Slurp, NPF symbol"><use href="#slurp" x="-102" y="-102" width="204" height="204"/></svg></div>
       <div class="meta">
-        <p class="lede">A house for research, design and fabrication. Form is studied, drawn and built under one roof, in our own workshop in Stockholm.</p>
+        <p class="lede">A house for research, design and fabrication. Form is studied, drawn and built under one roof, in our workshop in Stockholm.</p>
         <div><div class="label">Practice</div>Research / Design / Fabrication</div>
         <div><div class="label">Method</div>BRB — Build, Research, Build</div>
       </div>
@@ -220,34 +401,34 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 
   <section class="wrap sec" id="divisions">
     <div class="sec-head">
-      <h2>One identity.<br>Four functions.</h2>
-      <span class="label">NPF / Architecture</span>
+      <h2>One system.<br>Four functions.</h2>
+      <span class="label">NPF / Framework</span>
     </div>
     <div class="divs">
       <a class="div" href="#lab">
         <span class="label">Research</span>
-        <span class="code">LAB</span>
+        <span class="code cd">LAB</span>
         <span class="name">NPF / LAB</span>
         <p>Experiments in material, motion and form. Where questions are built before they are answered.</p>
         <span class="go">→ LAB_001 Big Slurp</span>
       </a>
       <a class="div" href="#index">
         <span class="label">Design</span>
-        <span class="code">ADD</span>
+        <span class="code cd">ADD</span>
         <span class="name">Applied Design Division</span>
         <p>Products, furniture, interiors and applied concepts. Research turned into objects people use.</p>
         <span class="go"><span class="tag">Opening soon</span></span>
       </a>
       <a class="div" href="#index">
         <span class="label">Workshop</span>
-        <span class="code">WTF</span>
+        <span class="code cd">WTF</span>
         <span class="name">Workshop for Temporary Forms</span>
         <p>Fabrication, set design, special builds and temporary installations. 440 m² of workshop on site.</p>
         <span class="go">→ Index</span>
       </a>
       <a class="div" href="#osv">
         <span class="label">Overview &amp; contact</span>
-        <span class="code">OSV</span>
+        <span class="code cd">OSV</span>
         <span class="name">Operational System View</span>
         <p>Project overview, contact and the way into the practice. Start here with a brief or a question.</p>
         <span class="go">→ Contact</span>
@@ -285,12 +466,14 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
   </section>
 
   <section class="wrap sec studies" id="studies">
-    <div class="sec-head"><h2>LAB_001<br>Mesh studies</h2><span class="label">Open torus — torsion, ridges, generations</span></div>
+    <div class="sec-head"><h2><span class="cd">LAB_002</span><br>Slurp_Generator</h2><span class="label">Research examples — figures / gen</span></div>
     <div class="grid">
-      <figure class="fig f-a"><div class="pane"><img src="assets/lab001/A_torsion.svg" alt="Wireframe of an open torus with torsion: the meridians spiral into the throat" loading="lazy" width="853" height="796"></div><figcaption><b>Torsion</b>The open torus twisted, so every meridian spirals into the throat.</figcaption></figure>
-      <figure class="fig f-c"><div class="pane"><img src="assets/lab001/C_generations.svg" alt="Five generations of open tori, each emerging from the throat of the one before" loading="lazy" width="625" height="897"></div><figcaption><b>Big Spit</b>Every generation shoots out of the last one's throat, turning the other way.</figcaption></figure>
-      <figure class="fig f-d"><div class="pane"><img src="assets/lab001/D_grid.svg" alt="Grid of nine open tori: torsion increases down the rows, ridges across the columns" loading="lazy" width="626" height="573"></div><figcaption><b>Torus grid</b>Torsion 0 → 1 down the rows. Ridges 0 → 6 → 12 across. One surface, nine temperaments.</figcaption></figure>
-      <figure class="fig f-b"><div class="pane"><img src="assets/lab001/B_ridges.svg" alt="Open torus with nine ridges running around its axis" loading="lazy" width="856" height="807"></div><figcaption><b>Ridges</b>Nine ridges run around the axis. The surface folds and still closes on itself.</figcaption></figure>
+      <div class="gens">
+      <figure class="gen gen-dk"><div class="tile"><video src="assets/lab002/gen-01.mp4" poster="assets/lab002/gen-01.jpg" muted loop playsinline preload="none" aria-label="Generated figure, copper light on dark"></video></div><figcaption><b>Fig. 01 / Gen</b>Research example</figcaption></figure>
+      <figure class="gen gen-lt"><div class="tile"><video src="assets/lab002/gen-02.mp4" poster="assets/lab002/gen-02.jpg" muted loop playsinline preload="none" aria-label="Generated figure, petals on grey"></video></div><figcaption><b>Fig. 02 / Gen</b>Research example</figcaption></figure>
+      <figure class="gen gen-lt"><div class="tile"><video src="assets/lab002/gen-03.mp4" poster="assets/lab002/gen-03.jpg" muted loop playsinline preload="none" aria-label="Generated figure, ridged rosette on grey"></video></div><figcaption><b>Fig. 03 / Gen</b>Research example</figcaption></figure>
+      <figure class="gen gen-dk"><div class="tile"><video src="assets/lab002/gen-04.mp4" poster="assets/lab002/gen-04.jpg" muted loop playsinline preload="none" aria-label="Generated figure, white open torus on dark"></video></div><figcaption><b>Fig. 04 / Gen</b>Research example</figcaption></figure>
+      </div>
       <div class="lab-cta">
         <div class="l">
           <span class="over">Interactive — NPF / Slurp Lab</span>
@@ -318,14 +501,14 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
       <div class="axes">
         <div><span class="label">Axis 01</span><h3>Physics</h3><p>Forces, flow and rotation. The material decides.</p></div>
         <div><span class="label">Axis 02</span><h3>Nature</h3><p>The patterns nature keeps returning to: vortex, torus, spiral.</p></div>
-        <div><span class="label">Axis 03</span><h3>The Grail</h3><p>The self-feeding figure. Drawn in as a cup, pushed out as a foot.</p></div>
+        <div><span class="label">Axis 03</span><h3>Consciousness</h3><p>The same figure, turned inward. Awareness that feeds on its own turning.</p></div>
       </div>
     </div>
   </section>
 
   <section class="brb sec" id="method">
     <div class="wrap">
-      <div class="sec-head"><h2>BRB</h2><span class="label">Method — not a division</span></div>
+      <div class="sec-head"><h2 class="cd">BRB</h2><span class="label">Method — not a division</span></div>
       <div class="steps">
         <div class="step"><span class="label">Step 1</span><h3>Build</h3><p>Start with the object. A rough model reveals more than a finished sketch.</p></div>
         <div class="step"><span class="label">Step 2</span><h3>Research</h3><p>Measure, read and test what the model shows. Bring in maths, nature and other disciplines.</p></div>
@@ -351,7 +534,7 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
 
   <section class="osv sec" id="osv">
     <div class="wrap grid">
-      <div class="osv-h"><h2>OSV</h2><p class="osv-sub">Operational System View</p><h2>Start here.</h2></div>
+      <div class="osv-h"><h2 class="cd">OSV</h2><p class="osv-sub">Operational System View</p><h2>Start here.</h2></div>
       <div class="ct">
         <span class="label">Projects, commissions, collaborations</span>
         <span class="mail" id="mail">studio@npf.house</span>
@@ -375,6 +558,17 @@ footer{padding-block:24px 36px;display:flex;justify-content:space-between;gap:16
     const sel=()=>{const r=document.createRange();r.selectNodeContents(m);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected — press copy"};
     try{navigator.clipboard.writeText(m.textContent).then(done,sel)}catch(e){sel()}
   });
+})();
+</script>
+<script>
+/* play generator clips only while visible; respect reduced motion (poster only) */
+(function(){
+  const vids=[...document.querySelectorAll('.gen video')];
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){vids.forEach(v=>v.preload='metadata');return}
+  if(!('IntersectionObserver' in window)){vids.forEach(v=>{v.preload='auto';v.play().catch(()=>{})});return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
+    if(e.isIntersecting){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{rootMargin:'200px'});
+  vids.forEach(v=>io.observe(v));
 })();
 </script>
 </body>
