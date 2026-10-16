@@ -7,7 +7,7 @@
 <title>NPF.house</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@300;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@300;500;700&display=swap">
 <style>
 /* Layout: strict 12-column Swiss grid, hairline rules, one orange accent, the Slurp as the only image-like object */
 :root{
@@ -211,7 +211,7 @@ nav a:hover{color:var(--orange-ink)}
 
 /* hero mark in a bone disc */
 .hero .disc{grid-column:8/13;align-self:end;justify-self:end;width:clamp(180px,30vw,440px);aspect-ratio:1;
-  border-radius:50%;background:var(--bone);border:1px solid var(--hair);display:grid;place-items:center;margin-bottom:.4em}
+  display:grid;place-items:center;margin-bottom:.4em}
 .hero .disc .mark{grid-column:auto;align-self:center;justify-self:center;width:64%;height:auto;max-width:none;aspect-ratio:1;margin:0;color:var(--ink);font-size:16px}
 .hero .meta{border-top:1px solid var(--hair)}
 
@@ -261,9 +261,9 @@ nav a:hover{color:var(--orange-ink)}
 .idx td.c{font-weight:700}
 .idx tr td.c:first-child::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;
   margin-right:10px;border:1px solid var(--hair);vertical-align:.05em}
-.idx tbody tr:nth-child(1) td.c:first-child::before{background:var(--bone)}
-.idx tbody tr:nth-child(2) td.c:first-child::before{background:var(--taupe)}
-.idx tbody tr:nth-child(3) td.c:first-child::before{background:var(--orange)}
+.idx tbody tr[data-div="LAB"] td.c:first-child::before{background:var(--bone)}
+.idx tbody tr[data-div="ADD"] td.c:first-child::before{background:var(--taupe)}
+.idx tbody tr[data-div="WTF"] td.c:first-child::before{background:var(--orange)}
 
 /* OSV */
 .osv{border-top:9px solid var(--void)}
@@ -527,9 +527,10 @@ nav a b{font-weight:500!important}
       <table class="idx">
         <thead><tr><th>No.</th><th>Project</th><th>Division</th><th>Type</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="c">LAB_001</td><td class="t">Big Slurp</td><td class="c">LAB</td><td>The source</td><td><span class="tag live">Continuous</span></td></tr>
-          <tr><td class="c">ADD002</td><td class="t">Pure Optical Emergence</td><td class="c">ADD</td><td>Light sculpture, etched glass</td><td><span class="tag">Opening soon</span></td></tr>
-          <tr><td class="c">WTF—</td><td class="t">Commissioned builds</td><td class="c">WTF</td><td>Set design, windows, installations</td><td><span class="tag">Archive in progress</span></td></tr>
+          <tr data-div="LAB"><td class="c">LAB_001</td><td class="t">Big Slurp</td><td class="c">LAB</td><td>The source</td><td><span class="tag live">Continuous</span></td></tr>
+          <tr data-div="LAB"><td class="c">LAB_002</td><td class="t">Slurp_Generator</td><td class="c">LAB</td><td>Figures / gen</td><td><span class="tag">Research</span></td></tr>
+          <tr data-div="ADD"><td class="c">ADD_002</td><td class="t">Pure Optical Emergence</td><td class="c">ADD</td><td>Light sculpture, etched glass</td><td><span class="tag">Opening soon</span></td></tr>
+          <tr data-div="WTF"><td class="c">WTF_2026_—</td><td class="t">Commissioned builds</td><td class="c">WTF</td><td>Set design, windows, installations</td><td><span class="tag">Archive in progress</span></td></tr>
         </tbody>
       </table>
     </div>
