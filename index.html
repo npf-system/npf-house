@@ -222,10 +222,9 @@ nav a:hover{color:var(--orange-ink)}
 .div:hover .code{color:var(--orange-ink)}
 .div .label{display:flex;align-items:center;gap:10px}
 .div .label::before{content:"";width:14px;height:14px;border-radius:50%;flex:none;border:1px solid var(--hair)}
-.div:nth-child(1) .label::before{background:var(--bone)}
-.div:nth-child(2) .label::before{background:var(--taupe)}
-.div:nth-child(3) .label::before{background:var(--orange)}
-.div:nth-child(4) .label::before{background:var(--ink);border-color:var(--ink)}
+/* Punkten: neutral (bone + ink-linje), orange på hover — samma objekt som punkten i hero */
+.div .label::before,.idx tr td.c:first-child::before{background:var(--bone);border-color:var(--hair);transition:background-color .18s ease}
+.div:hover .label::before,.div:focus-within .label::before,.idx tbody tr:hover td.c:first-child::before{background:var(--orange)}
 .div{border-right-color:var(--line)}
 
 /* tags & buttons — bone fill + hairline; hover goes to ink (black = no line) */
@@ -261,9 +260,6 @@ nav a:hover{color:var(--orange-ink)}
 .idx td.c{font-weight:700}
 .idx tr td.c:first-child::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;
   margin-right:10px;border:1px solid var(--hair);vertical-align:.05em}
-.idx tbody tr[data-div="LAB"] td.c:first-child::before{background:var(--bone)}
-.idx tbody tr[data-div="ADD"] td.c:first-child::before{background:var(--taupe)}
-.idx tbody tr[data-div="WTF"] td.c:first-child::before{background:var(--orange)}
 
 /* OSV */
 .osv{border-top:9px solid var(--void)}
